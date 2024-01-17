@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'ImageCheck.dart';
-    // ↓ここらへんも全部
+
 class StateImageLoderSelect extends StatefulWidget{
   const StateImageLoderSelect({super.key});
 

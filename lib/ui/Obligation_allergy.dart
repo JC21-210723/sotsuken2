@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sotsuken2/Data/AllAnotherData.dart';
+import 'package:sotsuken2/ui/ImageLoaderSelect.dart';
 import '../DB/Add.dart';
 import 'Recommendation_allergy.dart';
 import 'Another_ingredient.dart';
 
 import 'package:sotsuken2/Data/AllObligationData.dart';
 import 'package:sotsuken2/Data/AllRecommendationData.dart';
-
-//臨時
-import 'AllergyDetection.dart';
-
 
 class StateObligation_allergy extends StatefulWidget{
   final String PageFlag;
@@ -186,7 +183,7 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                         if(widget.PageFlag == 'ChooseUser'){
                           Navigator.of(context).push(
                               MaterialPageRoute(builder: (context){
-                                return const StateAllergyDetection();
+                                return const StateImageLoderSelect();
                               })
                           );
 
@@ -224,5 +221,4 @@ class Obligation_allergy extends State<StateObligation_allergy>{
     debugPrint('Addlistをimportした結果：$import');
     debugPrint(DBadd.AddList.toString());
   }
-
 }

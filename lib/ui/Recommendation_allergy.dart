@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sotsuken2/ui/AllergyDetection.dart';
 import 'package:sotsuken2/Data/AllObligationData.dart';
 import 'package:sotsuken2/Data/AllAnotherData.dart';
 import 'package:sotsuken2/Data/AllRecommendationData.dart';
+import 'package:sotsuken2/ui/ImageLoaderSelect.dart';
 import '../DB/Add.dart';
 import 'Another_ingredient.dart';
 
@@ -109,7 +109,7 @@ class Recommendation_allergy extends State<StateRecommendation_allergy> {
                   ],
                 ),
               ],
-              for(int n = 18 ; n < 20 ; n++ )...[
+              for(int n = 17 ; n < 20 ; n++ )...[
                 SizedBox(
                   width: 319,
                   child:Transform.scale(
@@ -179,7 +179,7 @@ class Recommendation_allergy extends State<StateRecommendation_allergy> {
                     if(widget.PageFlag == 'ChooseUser'){
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (context){
-                            return const StateAllergyDetection();
+                            return const StateImageLoderSelect();
                           })
                       );
                     }else if(widget.PageFlag == 'CreateUser' || widget.PageFlag =='SettingUser'){

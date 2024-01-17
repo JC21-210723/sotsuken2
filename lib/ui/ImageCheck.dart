@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sotsuken2/Api/api.dart';
+import 'package:sotsuken2/Api/verification.dart';
 import 'package:sotsuken2/ui/AllergyNotDetection.dart';
 import 'dart:io';
+import '../Api/api.dart';
 import 'AllergyDetection.dart';
 import '../Api/crop.dart';
 
@@ -58,7 +59,6 @@ class _ImageCheckState extends State<ImageCheck> {
                     width: 250,
                     child: imagepath ?? Image.file(File(widget.image.path)),
                   ),
-
                   Container(
                     padding: const EdgeInsets.all(8),
                     child: const Text(
@@ -92,7 +92,7 @@ class _ImageCheckState extends State<ImageCheck> {
                                 fontWeight: FontWeight.bold),
                           ),
                           onPressed: () async {
-                            Navigator.pushNamed(context, '/');
+                            Navigator.pop(context);
                           },
                         ),
                       ),
@@ -116,8 +116,9 @@ class _ImageCheckState extends State<ImageCheck> {
                             setState(() {
                               isLoading = true;
                             });
-                            await Api.instance.postData(widget.image);
-                            List<String> content = await Api.instance.result();
+                            XFile xFileimage = cropimage ?? widget.image;
+                            await Api.instance.postData(xFileimage);
+                            List<String> content = await verifications.instance.verification();
                             setState(() {
                               isLoading = false;
                             });

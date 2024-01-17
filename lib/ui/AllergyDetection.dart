@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'ReadIngredient.dart';
-//臨時
-import 'AllergyNotDetection.dart';
+import 'package:sotsuken2/Api/verification.dart';
+import 'package:sotsuken2/ui/ImageLoaderSelect.dart';
+import 'package:sotsuken2/ui/ReadIngredient.dart';
 
 class StateAllergyDetection extends StatefulWidget{
   const StateAllergyDetection({super.key});
@@ -13,9 +13,34 @@ class StateAllergyDetection extends StatefulWidget{
 }
 
 class AllergyDetection_Page extends State<StateAllergyDetection>{
+  List<String>vals = ["読み込み中"];
+  bool _isInitialized = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (!_isInitialized) {
+      // 非同期処理を直接行わず、Future.delayedを使用して非同期処理が完了後にsetStateを呼ぶ
+      Future.delayed(Duration.zero, () {
+        postData();
+        _isInitialized = true;
+      });
+    }
+  }
+
+  void postData() async {
+    List<String> contentList = await verifications.instance.verification();
+    if (mounted) {
+      setState(() {
+        print("セットステートするで");
+        vals = contentList;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context){
+    print("AllergyDetectionにきた");
     return Scaffold(
       appBar: AppBar(
           title: const Text('成分チェッカー')
@@ -47,30 +72,30 @@ class AllergyDetection_Page extends State<StateAllergyDetection>{
                   ),
                 ),
                 Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(color:Colors.deepOrange,width: 1)
+                  ),
+                  child:Container(
                     decoration: BoxDecoration(
                         border: Border.all(color:Colors.deepOrange,width: 1)
                     ),
-                    child:Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color:Colors.deepOrange,width: 1)
-                      ),
-                      margin: const EdgeInsets.all(5),
-                      width: 300,
-                      height: 320,
-                      //多分↓ここのconst邪魔になる
-                      child:const Column(
-                        children: [
-                          Text(''),
-                          Text(''),
-                          Text(''),
-                          Text(''),
-                          Text(''),
-                          Text(''),
-                        ],
-                      ),
-                    )
-                ),
+                    margin: const EdgeInsets.all(5),
+                    width: 300,
+                    height: 320,
 
+                    //ここが表示部分
+                    child:ListView.builder(
+                      itemCount: vals.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4.0)
+                              .copyWith(left: 5.0),
+                          child: Text(vals[index]),
+                        );
+                      },
+                    ),
+                  ),
+                ),
                 Container(
                   height: 60,
                   width: 300,
@@ -84,7 +109,7 @@ class AllergyDetection_Page extends State<StateAllergyDetection>{
                     onPressed: (){
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (context){
-                            return const StateAllergyNotDetection();
+                            return StateImageLoderSelect();
                           })
                       );
                     },
@@ -150,7 +175,7 @@ class AllergyDetection_Page extends State<StateAllergyDetection>{
                             onPressed: (){
                               Navigator.of(context).push(
                                   MaterialPageRoute(builder: (context){
-                                    return StateReadIngredient();
+                                    return const ReadIngredient();
                                   })
                               );
                             }

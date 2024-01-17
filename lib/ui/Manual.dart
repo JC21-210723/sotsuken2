@@ -1,6 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'ManualAnotherAdd.dart';
+import 'ManualUserAdd.dart';
+import 'ManualAddChange.dart';
+import 'ManualDeleteUser.dart';
+
 
 class Manual_Page extends StatelessWidget{
   @override
@@ -47,6 +50,27 @@ class Manual_Page extends StatelessWidget{
                 ),
               ),
               Container(
+                margin: const EdgeInsets.fromLTRB(15, 20, 15, 20),
+                alignment: Alignment.topLeft,
+                  /*
+                  child:  const Column(
+                    children: [
+                      Text('・ユーザーの登録について\n',
+                        style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)
+                        ,textAlign: TextAlign.start,
+                      ),Text('本製品はユーザー情報を登録して\nご利用いただけます。\n'
+                        'また、SKIPにて登録せずにご利用\nいただくこともできます。',
+                        style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),
+                      ),
+
+                    ]
+                  ),
+
+                   */
+
+
+              ),
+              Container(
                 width:330,
                 height:55,
                 margin: const EdgeInsets.all(10),
@@ -56,7 +80,13 @@ class Manual_Page extends StatelessWidget{
                       color: Colors.deepOrange
                     ),
                   ),
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context){
+                        return ManualAnotherAdd_Page();
+                      })
+                    );
+                  },
                   child: const Text('追加成分の登録について',style: TextStyle(color:Colors.deepOrange,fontSize: 25,fontWeight: FontWeight.bold),)
                 )
               ),
@@ -70,7 +100,13 @@ class Manual_Page extends StatelessWidget{
                             color: Colors.deepOrange
                         ),
                       ),
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context){
+                              return ManualUserAdd_Page();
+                            })
+                        );
+                      },
                       child: const Text('ユーザーの登録について',style: TextStyle(color:Colors.deepOrange,fontSize: 25,fontWeight: FontWeight.bold),)
                   )
               ),
@@ -84,8 +120,14 @@ class Manual_Page extends StatelessWidget{
                             color: Colors.deepOrange
                         ),
                       ),
-                      onPressed: (){},
-                      child: const Text('登録の変更について',style: TextStyle(color:Colors.deepOrange,fontSize: 25,fontWeight: FontWeight.bold),)
+                      onPressed: (){
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context){
+                              return ManualAddChange_Page();
+                            })
+                        );
+                      },
+                      child: const Text('登録内容の変更について',style: TextStyle(color:Colors.deepOrange,fontSize: 25,fontWeight: FontWeight.bold),)
                   )
               ),
               Container(
@@ -98,7 +140,13 @@ class Manual_Page extends StatelessWidget{
                             color: Colors.deepOrange
                         ),
                       ),
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context){
+                              return ManualDeleteUser_Page();
+                            })
+                        );
+                      },
                       child: const Text('ユーザーの削除について',style: TextStyle(color:Colors.deepOrange,fontSize: 25,fontWeight: FontWeight.bold),)
                   )
               ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'ReadIngredient.dart';
+import 'package:sotsuken2/ui/ReadIngredient.dart';
 
 class StateAllergyNotDetection extends StatefulWidget{
   const StateAllergyNotDetection({super.key});
-
   @override
   State<StateAllergyNotDetection> createState(){
     return AllergyNotDetection_Page();
@@ -14,6 +13,7 @@ class AllergyNotDetection_Page extends State<StateAllergyNotDetection>{
 
   @override
   Widget build(BuildContext context){
+    print("AllergyNotDetectionにきた");
     return Scaffold(
       appBar: AppBar(
           title: const Text('成分チェッカー')
@@ -134,7 +134,7 @@ class AllergyNotDetection_Page extends State<StateAllergyNotDetection>{
                             onPressed: (){
                               Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context){
-                                  return StateReadIngredient();
+                                  return ReadIngredient();
                                 })
                               );
                             }

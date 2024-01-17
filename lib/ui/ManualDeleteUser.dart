@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 //追加成分登録についてのページ用
-class ManualAnotherAdd_Page extends StatelessWidget{
+class ManualDeleteUser_Page extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,37 +24,35 @@ class ManualAnotherAdd_Page extends StatelessWidget{
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.deepOrange),
                   ),
-                  child:const Text('追加成分の登録について',
+                  child:const Text('ユーザーの削除について',
                     style: TextStyle(fontSize: 25,color: Colors.deepOrange,fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
               Container(
                 margin:const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child:Image.asset('images/ManualAnotherAdd1.png'),
+                child:Image.asset('images/ManualDeleteUser1.png'),
               ),
               Container(
+
                 margin:const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child:Image.asset('images/ManualAnotherAdd2.png'),
+                child:Image.asset('images/ManualDeleteUser2.png'),
               ),
               Container(
-                margin:const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child:Image.asset('images/ManualAnotherAdd3.png'),
+                  width: 200,
+                  height:50,
+                  margin: const EdgeInsets.fromLTRB(10, 20, 10, 40),
+                  child:ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepOrange
+                    ),
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                    child: const Text('戻る',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                  )
               ),
-              Container(
-                width: 200,
-                height:50,
-                margin: const EdgeInsets.fromLTRB(10, 20, 10, 40),
-                child:ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepOrange
-                  ),
-                  onPressed: (){
-                    Navigator.pop(context);
-                  },
-                  child: const Text('戻る',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-                )
-              ),
+
             ],
           ),
         ),

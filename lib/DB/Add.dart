@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
-
 import 'Database.dart';
 
 class DBadd{

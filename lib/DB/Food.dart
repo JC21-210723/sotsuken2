@@ -105,6 +105,4 @@ class DBfood{
     debugPrint('最終的にSuilistに入れた内容：$Suilist');
     return Suilist;
   }
-
-
 }

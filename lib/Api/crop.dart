@@ -11,7 +11,6 @@ class Crop{
   static Future<Null> cropImage(XFile image,Function(File?) onImageCropped)async{
     File? imageFile = File(image.path);
     if(imageFile != null){
-      /*エラー出てるからコメントアウト
       File? croppedFile = await ImageCropper().cropImage(
         sourcePath: imageFile.path,
         //android側の設定
@@ -44,12 +43,9 @@ class Crop{
           title: 'Cropper',
         ),
       );
-
       if (croppedFile != null) {
         onImageCropped(croppedFile);
       }
-      */
-
     }
   }
 
