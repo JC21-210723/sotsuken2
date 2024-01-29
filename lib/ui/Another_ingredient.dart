@@ -40,75 +40,57 @@ class Another_ingredient extends State<StateAnother_ingredient>{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar:AppbarComp(),
-        body: Center(
-            child:SingleChildScrollView(
-                child:Column(
+    return Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors:[Colors.white,Color(0xFF90D4FA)],
+        )
+      ),
+      child:Scaffold(
+        backgroundColor: Colors.transparent,
+          appBar:AppbarComp(),
+          body: Center(
+              child:SingleChildScrollView(
+                  child:Column(
 
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                        padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        decoration:BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color:Colors.indigo,
-                            width: 1,
-                          ),
-                        ),
-                        child: const Text('その他の登録した成分',
-                            style: TextStyle(
-                                fontSize: 24,
-                                color:Colors.indigo,
-                                fontWeight: FontWeight.bold
-                            )
-                        ),
-                      ),
-
-                      if(DBadd.AddList.isEmpty)...[
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
                         Container(
-                          margin: const EdgeInsets.all(30),
-                          child:const FittedBox(
-                            child:Text('何も登録されていません',style: TextStyle(fontSize: 25),),
+                          margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                          decoration:BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color:Colors.indigo,
+                              width: 1,
+                            ),
+                          ),
+                          child: const Text('その他の登録した成分',
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  color:Colors.indigo,
+                                  fontWeight: FontWeight.bold
+                              )
                           ),
                         ),
-                      ]else...[
-                        for(int n = 0 ; n < forMethod(); n = n+2)...[
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                for(int nn = 0 ; nn < 2  ; nn++)...[
-                                  if(nn == 0)...[
 
-                                    Container(
-                                      width: 167,
-                                      child:Transform.scale(
-                                        scale:1.1,
-                                        child: CheckboxListTile(
-                                            controlAffinity: ListTileControlAffinity.leading,
-                                            title: Transform.translate(
-                                              offset: const Offset(-15,0),
-                                              child:Text(DBadd.AddList[n+nn],style: TextStyle(fontSize: 17)),
-                                            ),
-                                            value: aad.getBool3()[n+nn],
-                                            onChanged: (value) {
-                                              setState(() {
-                                                aad.getBool3()[n+nn] = value!;
-                                              });
-                                            }
-                                        ),
-                                      ),
-                                    ),
+                        if(DBadd.AddList.isEmpty)...[
+                          Container(
+                            margin: const EdgeInsets.all(30),
+                            child:const FittedBox(
+                              child:Text('何も登録されていません',style: TextStyle(fontSize: 25),),
+                            ),
+                          ),
+                        ]else...[
+                          for(int n = 0 ; n < forMethod(); n = n+2)...[
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  for(int nn = 0 ; nn < 2  ; nn++)...[
+                                    if(nn == 0)...[
 
-                                  ]else...[
-
-                                    if(DBadd.AddList.length % 2 == 1 && DBadd.AddList.length == n+1)...[
-                                      Container(
-                                        width: 167,
-                                      ),
-                                    ]else...[
                                       Container(
                                         width: 167,
                                         child:Transform.scale(
@@ -117,7 +99,7 @@ class Another_ingredient extends State<StateAnother_ingredient>{
                                               controlAffinity: ListTileControlAffinity.leading,
                                               title: Transform.translate(
                                                 offset: const Offset(-15,0),
-                                                child:Text(DBadd.AddList[n+nn],style: TextStyle(fontSize: 18)),
+                                                child:Text(DBadd.AddList[n+nn],style: TextStyle(fontSize: 17)),
                                               ),
                                               value: aad.getBool3()[n+nn],
                                               onChanged: (value) {
@@ -128,121 +110,149 @@ class Another_ingredient extends State<StateAnother_ingredient>{
                                           ),
                                         ),
                                       ),
+
+                                    ]else...[
+
+                                      if(DBadd.AddList.length % 2 == 1 && DBadd.AddList.length == n+1)...[
+                                        Container(
+                                          width: 167,
+                                        ),
+                                      ]else...[
+                                        Container(
+                                          width: 167,
+                                          child:Transform.scale(
+                                            scale:1.1,
+                                            child: CheckboxListTile(
+                                                controlAffinity: ListTileControlAffinity.leading,
+                                                title: Transform.translate(
+                                                  offset: const Offset(-15,0),
+                                                  child:Text(DBadd.AddList[n+nn],style: TextStyle(fontSize: 18)),
+                                                ),
+                                                value: aad.getBool3()[n+nn],
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    aad.getBool3()[n+nn] = value!;
+                                                  });
+                                                }
+                                            ),
+                                          ),
+                                        ),
+                                      ]
+
                                     ]
+                                  ],
+                                ]
+                            )
 
-                                  ]
-                                ],
-                              ]
-                          )
-
+                          ],
                         ],
-                      ],
 
-                      Container(
-                        width: 290,
-                        height: 90,
-                        margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                        padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
-                        child:  ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue,
-                              shape:RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              elevation: 7
-                          ),
-                          onPressed:(){
-                            Navigator.of(context).push(
-                                MaterialPageRoute(builder: (context){
-                                  return StateAddAnotherIngredient(widget.PageFlag,widget.PageCount);
-                                })
-                            ).then((value){
-                              setState(() {});
-                            });
-                          },
-                          child: const Text('その他の追加成分を\n新規登録',style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.bold,
-                          ),
-                              textAlign: TextAlign.center),
-                        ),
-                      ),
-                      if(widget.PageFlag != 'Manual')...[
                         Container(
                           width: 290,
-                          height: 70,
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
+                          height: 90,
+                          margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                           padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
                           child:  ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.orange[700],
+                                backgroundColor: Colors.blue,
                                 shape:RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 elevation: 7
                             ),
                             onPressed:(){
-                              if(widget.PageFlag == 'ChooseUser'){
-                                Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (context){
-                                      return const StateImageLoderSelect();
-                                    })
-                                );
-
-                              }else if(widget.PageFlag == 'CreateUser'){
-                                Navigator.of(context).pop();
-                              }else if(widget.PageFlag == 'ChooseUser' || widget.PageFlag == 'SettingUser'){
-                                debugPrint(widget.PageCount.toString());
-                                for(int n = 0 ; n <= widget.PageCount; n++){
-                                  Navigator.of(context).pop();
-                                }
-                              }
-                              aod.HanteiObligation();
-                              ard.HanteiRecommendation();
-                              aad.HanteiAnother();
-                            },
-                            child: const Text('決定',style: TextStyle(
-                              fontSize: 23,
-                              fontWeight: FontWeight.bold,
-                            ),
-                                textAlign: TextAlign.center),
-                          ),
-                        ),
-                      ],
-                      if(widget.PageFlag == 'Manual')...[
-                        Container(
-                          width: 290,
-                          height: 70,
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
-                          padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
-                          child:  ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red[400],
-                                shape:RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                elevation: 7
-                            ),
-                            onPressed:(){
-                              _deleteAdd();
-                              _selectAdd();
-                              Future.delayed(Duration(seconds: 1)).then((_){
-                                aad.AllResetAnother();
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context){
+                                    return StateAddAnotherIngredient(widget.PageFlag,widget.PageCount);
+                                  })
+                              ).then((value){
                                 setState(() {});
                               });
                             },
-                            child: const Text('選択した項目を削除',style: TextStyle(
+                            child: const Text('その他の追加成分を\n新規登録',style: TextStyle(
                               fontSize: 23,
                               fontWeight: FontWeight.bold,
                             ),
                                 textAlign: TextAlign.center),
                           ),
-                        )
-                      ],
-                    ]
-                )
-            )
-        )
+                        ),
+                        if(widget.PageFlag != 'Manual')...[
+                          Container(
+                            width: 290,
+                            height: 70,
+                            margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
+                            padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
+                            child:  ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.orange[700],
+                                  shape:RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  elevation: 7
+                              ),
+                              onPressed:(){
+                                if(widget.PageFlag == 'ChooseUser'){
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context){
+                                        return const StateImageLoderSelect();
+                                      })
+                                  );
+
+                                }else if(widget.PageFlag == 'CreateUser'){
+                                  Navigator.of(context).pop();
+                                }else if(widget.PageFlag == 'ChooseUser' || widget.PageFlag == 'SettingUser'){
+                                  debugPrint(widget.PageCount.toString());
+                                  for(int n = 0 ; n <= widget.PageCount; n++){
+                                    Navigator.of(context).pop();
+                                  }
+                                }
+                                aod.HanteiObligation();
+                                ard.HanteiRecommendation();
+                                aad.HanteiAnother();
+                              },
+                              child: const Text('決定',style: TextStyle(
+                                fontSize: 23,
+                                fontWeight: FontWeight.bold,
+                              ),
+                                  textAlign: TextAlign.center),
+                            ),
+                          ),
+                        ],
+                        if(widget.PageFlag == 'Manual')...[
+                          Container(
+                            width: 290,
+                            height: 70,
+                            margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
+                            padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
+                            child:  ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red[400],
+                                  shape:RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  elevation: 7
+                              ),
+                              onPressed:(){
+                                _deleteAdd();
+                                _selectAdd();
+                                Future.delayed(Duration(seconds: 1)).then((_){
+                                  aad.AllResetAnother();
+                                  setState(() {});
+                                });
+                              },
+                              child: const Text('選択した項目を削除',style: TextStyle(
+                                fontSize: 23,
+                                fontWeight: FontWeight.bold,
+                              ),
+                                  textAlign: TextAlign.center),
+                            ),
+                          )
+                        ],
+                      ]
+                  )
+              )
+          )
+      ),
     );
   }
 

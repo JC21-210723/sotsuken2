@@ -48,7 +48,7 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                     children:<Widget>[
                       Container(
                         width: 300,
-                        margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
+                        margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.white,
@@ -101,15 +101,6 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                         decoration: BoxDecoration(
                           border: Border.all(color:Colors.white30),
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.blue.shade200,
-                          boxShadow: const [
-                            BoxShadow(
-                                color:Colors.black12,
-                                blurRadius: 2,
-                                spreadRadius: 2,
-                                offset: Offset(4,4)
-                            )
-                          ],
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -121,11 +112,11 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                                   for(int nn = 0 ; nn < 2  ; nn++)...[
                                     if(nn == 0)...[
                                       Container(
-                                          width:160,
-                                          decoration: BoxDecoration(
+                                          width:150,
+                                          margin: const EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                          decoration: const BoxDecoration(
                                               color: Colors.white,
-                                              border: Border.all(color: Colors.blue.shade200,width: 3),
-                                              borderRadius: const BorderRadius.only(
+                                              borderRadius:  BorderRadius.only(
                                                 bottomLeft:Radius.circular(50),
                                                 topLeft:Radius.circular(50),
                                                 topRight: Radius.circular(10),
@@ -136,10 +127,7 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                                               scale:1.05,
                                               child:CheckboxListTile(
                                                   controlAffinity: ListTileControlAffinity.leading,
-                                                  title: Transform.translate(
-                                                    offset: const Offset(-15,0),
-                                                    child:Text(aod.getValue()[n+nn],style: const TextStyle(fontSize: 20)),
-                                                  ),
+                                                  title: Text(aod.getValue()[n+nn],style: const TextStyle(fontSize: 20)),
                                                   value: aod.getBool()[n+nn],
                                                   onChanged: (value) {
                                                     setState(() {
@@ -152,6 +140,7 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                                     ]else...[
                                       Container(
                                         width: 160,
+                                        margin: const EdgeInsets.fromLTRB(0, 3, 0, 3),
                                         decoration: const BoxDecoration(
                                             color: Colors.white,
                                             borderRadius: BorderRadius.only(
@@ -212,7 +201,7 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              height: 90,
+                              height: 85,
                               width: 150,
                               margin: const EdgeInsets.fromLTRB(0, 10, 5, 0),
                               padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
@@ -246,8 +235,8 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                             ),
                             if(widget.PageFlag == 'ChooseUser' || widget.PageFlag =='SettingUser')...[
                               Container(
-                                width: 150,
-                                height: 90,
+                                width: 140,
+                                height: 85,
                                 margin: const EdgeInsets.fromLTRB(5, 10, 0, 0),
                                 padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
                                 child:ElevatedButton(
@@ -268,7 +257,7 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                                       );
                                     });
                                   },
-                                  child: const Text('登録済み成分',
+                                  child: const Text('登録済み\n成分',
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -283,7 +272,7 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                         Container(
                           height: 70,
                           width: 290,
-                          padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
+                          padding:const EdgeInsets.fromLTRB(0, 3, 0, 12),
                           child:  ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.orange[700],
