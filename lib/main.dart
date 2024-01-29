@@ -55,6 +55,7 @@ class Home_Page_State extends StatefulWidget{
 }
 
 class Home_Page extends State<Home_Page_State>{
+  static String flagCategory = '';
   AllAnotherData aad = AllAnotherData();
   @override
   Widget build(BuildContext context) {
@@ -156,6 +157,7 @@ class Home_Page extends State<Home_Page_State>{
                                 ],
                                ),
                                 onPressed:(){
+                                  flagCategory = 'food';
                                   _selectlistUser();
                                   Future.delayed(const Duration(seconds: 1)).then((_){
                                     Navigator.pushNamed(context, 'ChooseUser_page');
@@ -200,9 +202,10 @@ class Home_Page extends State<Home_Page_State>{
                                   ],
                                 ),
                                 onPressed:(){
-                                  //_selectlistUser();
+                                  flagCategory = 'beauty';
+                                  _selectlistUser();
                                   Future.delayed(const Duration(seconds: 1)).then((_){
-                                    //Navigator.pushNamed(context, 'ChooseUser_page');
+                                    Navigator.pushNamed(context, 'ChooseUser_page');
                                   });
                                 }
                             ),
