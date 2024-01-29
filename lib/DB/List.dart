@@ -23,6 +23,10 @@ class DBlist{
         selectid = userMap['userid'] as int;
         print('useridを出力：$selectid');
         break; //ループを抜ける
+      }else if(userMap.containsKey('userid2')){
+        selectid = userMap['userid2'] as int;
+        print('userid2を出力：$selectid');
+        break; //ループを抜ける
       }
     }
     return selectid;
