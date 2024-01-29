@@ -22,7 +22,7 @@ class DBlist{
       if (userMap.containsKey('userid')) {
         selectid = userMap['userid'] as int;
         print('useridを出力：$selectid');
-        break; // ループを抜ける
+        break; //ループを抜ける
       }
     }
     return selectid;
@@ -74,12 +74,12 @@ class DBlist{
         deleteid = userMap['userid'] as int;
         debugPrint('useridを出力：$deleteid');
         await db.delete('list', where: 'userid = ?', whereArgs: [deleteid],);//ユーザidと一致するリストデータの削除
-        break; // ループを抜ける
+        break; //ループを抜ける
       }else if(userMap.containsKey('userid2')){
         deleteid = userMap['userid'] as int;
         debugPrint('userid2を出力：$deleteid');
         await db.delete('list', where: 'userid2 = ?', whereArgs: [deleteid],);//ユーザidと一致するリストデータの削除
-        break; // ループを抜ける
+        break; //ループを抜ける
       }
       return deleteid;
     }
