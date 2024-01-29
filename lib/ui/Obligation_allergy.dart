@@ -111,61 +111,62 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                                 children: [
                                   for(int nn = 0 ; nn < 2  ; nn++)...[
                                     if(nn == 0)...[
+                                      //↓今テストで作ってる
                                       Container(
-                                          width:150,
-                                          margin: const EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                          decoration: const BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:  BorderRadius.only(
-                                                bottomLeft:Radius.circular(50),
-                                                topLeft:Radius.circular(50),
-                                                topRight: Radius.circular(10),
-                                                bottomRight: Radius.circular(10),
-                                              )
+                                        height: 53,
+                                        width:140,
+                                        margin: const EdgeInsets.fromLTRB(0, 3, 7, 3),
+                                        child:ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor:  aod.getBool()[n+nn] ? Colors.lightBlueAccent : Colors.white,
+                                              foregroundColor: aod.getBool()[n+nn] ? Colors.white : Colors.black,
+                                              shape:const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                                  bottomLeft:Radius.circular(50),
+                                                  topLeft:Radius.circular(50),
+                                                  topRight: Radius.circular(10),
+                                                  bottomRight: Radius.circular(10),
+                                                )
+                                              ),
                                           ),
-                                          child:Transform.scale(
-                                              scale:1.05,
-                                              child:CheckboxListTile(
-                                                  controlAffinity: ListTileControlAffinity.leading,
-                                                  title: Text(aod.getValue()[n+nn],style: const TextStyle(fontSize: 20)),
-                                                  value: aod.getBool()[n+nn],
-                                                  onChanged: (value) {
-                                                    setState(() {
-                                                      aod.getBool()[n+nn] = value!;
-                                                    });
-                                                  }
-                                              )
-                                          )
+                                          onPressed: (){
+                                            setState(() {
+                                              aod.getBool()[n+nn] = !aod.getBool()[n+nn];
+                                            });
+
+                                          },
+                                          child: Text(aod.getValue()[n+nn],style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
+                                        ),
+                                        //↑今テストで作ってる
                                       ),
+
                                     ]else...[
                                       Container(
-                                        width: 160,
-                                        margin: const EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                        decoration: const BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.only(
-                                              bottomLeft:Radius.circular(50),
-                                              topLeft:Radius.circular(50),
-                                              topRight: Radius.circular(10),
-                                              bottomRight: Radius.circular(10),
-                                            )
-                                        ),
-                                        child:Transform.scale(
-                                          scale:1.05,
-                                          child: CheckboxListTile(
-                                              controlAffinity: ListTileControlAffinity.leading,
-                                              title: Transform.translate(
-                                                offset: const Offset(-15,0),
-                                                child:Text(aod.getValue()[n+nn],style: const TextStyle(fontSize: 20)),
-                                              ),
-                                              value: aod.getBool()[n+nn],
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  aod.getBool()[n+nn] = value!;
-                                                });
-                                              }
+                                        height: 53,
+                                        width:140,
+                                        margin: const EdgeInsets.fromLTRB(7, 3, 0, 3),
+                                        child:ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:  aod.getBool()[n+nn] ? Colors.lightBlueAccent : Colors.white,
+                                            foregroundColor: aod.getBool()[n+nn] ? Colors.white : Colors.black,
+                                            shape:const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                                  bottomLeft:Radius.circular(50),
+                                                  topLeft:Radius.circular(50),
+                                                  topRight: Radius.circular(10),
+                                                  bottomRight: Radius.circular(10),
+                                                )
+                                            ),
                                           ),
+                                          onPressed: (){
+                                            setState(() {
+                                              aod.getBool()[n+nn] = !aod.getBool()[n+nn];
+                                            });
+
+                                          },
+                                          child: Text(aod.getValue()[n+nn],style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
                                         ),
+                                        //↑今テストで作ってる
                                       ),
                                     ]
                                   ],
@@ -176,7 +177,7 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                         ),
                       ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
                     width: 320,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -190,10 +191,6 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                               offset: Offset(4,4)
                           )
                         ],
-
-
-
-
                       ),
                     child:Column(
                       children: [

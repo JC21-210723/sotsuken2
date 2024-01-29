@@ -93,184 +93,215 @@ class Recommendation_allergy extends State<StateRecommendation_allergy> {
                     ),
                   ),
                 ),
-                for(int n = 0 ; n < 18; n = n+2)...[
-                  Row(
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                  width: 322,
+                  decoration: BoxDecoration(
+                    border: Border.all(color:Colors.white30),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      for(int nn = 0 ; nn < 2  ; nn++)...[
-                        if(nn == 0)...[
-                          Container(
-                              width:176,
-                              margin: const EdgeInsets.fromLTRB(0, 3, 0, 3),
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:  BorderRadius.only(
-                                    bottomLeft:Radius.circular(50),
-                                    topLeft:Radius.circular(50),
-                                    topRight: Radius.circular(10),
-                                    bottomRight: Radius.circular(10),
-                                  )
-                              ),
-                              child:Transform.scale(
-                                  scale:1.1,
-                                  child:CheckboxListTile(
-                                      controlAffinity: ListTileControlAffinity.leading,
-                                      title: Transform.translate(
-                                        offset: const Offset(-15,0),
-                                        child:Text(ard.getValue()[n+nn],style: const TextStyle(fontSize: 19)),
+                      for(int n = 0 ; n < 18; n = n+2)...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            for(int nn = 0 ; nn < 2  ; nn++)...[
+                              if(nn == 0)...[
+                                Container(
+                                  height: 53,
+                                  width:140,
+                                  margin: const EdgeInsets.fromLTRB(0, 3, 7, 3),
+                                  child:ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:  ard.getBool()[n+nn] ? Colors.lightBlueAccent : Colors.white,
+                                      foregroundColor: ard.getBool()[n+nn] ? Colors.white : Colors.black,
+                                      shape:const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft:Radius.circular(50),
+                                            topLeft:Radius.circular(50),
+                                            topRight: Radius.circular(10),
+                                            bottomRight: Radius.circular(10),
+                                          )
                                       ),
-                                      value: ard.getBool()[n+nn],
-                                      onChanged: (value) {
+                                    ),
+                                    onPressed: (){
+                                      setState(() {
+                                        ard.getBool()[n+nn] = !ard.getBool()[n+nn];
+                                      });
+
+                                    },
+                                    child: Text(ard.getValue()[n+nn],style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
+                                  ),
+                                ),
+                              ]else...[
+                                if(n+1 == 17)...[
+                                  Container(
+                                    margin: const EdgeInsets.fromLTRB(7, 3, 0, 3),
+                                    height: 53,
+                                    width:140,
+                                  ),
+                                ]else...[
+                                  Container(
+                                    height: 53,
+                                    width:140,
+                                    margin: const EdgeInsets.fromLTRB(7, 3, 0, 3),
+                                    child:ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:  ard.getBool()[n+nn] ? Colors.lightBlueAccent : Colors.white,
+                                        foregroundColor: ard.getBool()[n+nn] ? Colors.white : Colors.black,
+                                        shape:const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft:Radius.circular(50),
+                                              topLeft:Radius.circular(50),
+                                              topRight: Radius.circular(10),
+                                              bottomRight: Radius.circular(10),
+                                            )
+                                        ),
+                                      ),
+                                      onPressed: (){
                                         setState(() {
-                                          ard.getBool()[n+nn] = value!;
+                                          ard.getBool()[n+nn] = !ard.getBool()[n+nn];
                                         });
-                                      }
-                                  )
-                              )
-                          ),
-                        ]else...[
-                          if(n+1 == 17)...[
-                            Container(
-                              width: 157,
-                            ),
-                          ]else...[
-                            Container(
-                              width: 157,
-                              margin: const EdgeInsets.fromLTRB(0, 3, 0, 3),
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:  BorderRadius.only(
+
+                                      },
+                                      child: Text(ard.getValue()[n+nn],style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ],
+                          ],
+                        ),
+                      ],
+                      for(int n = 17 ; n < 20 ; n++ )...[
+                        Container(
+                          height: 53,
+                          width:300,
+                          margin: const EdgeInsets.fromLTRB(0, 3, 0, 3),
+                          child:ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:  ard.getBool()[n] ? Colors.lightBlueAccent : Colors.white,
+                              foregroundColor: ard.getBool()[n] ? Colors.white : Colors.black,
+                              shape:const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
                                     bottomLeft:Radius.circular(50),
                                     topLeft:Radius.circular(50),
                                     topRight: Radius.circular(10),
                                     bottomRight: Radius.circular(10),
                                   )
                               ),
-                              child:Transform.scale(
-                                scale:1.1,
-                                child: CheckboxListTile(
-                                    controlAffinity: ListTileControlAffinity.leading,
-                                    title: Transform.translate(
-                                      offset: const Offset(-15,0),
-                                      child:Text(ard.getValue()[n+nn],style: const TextStyle(fontSize: 20)),
-                                    ),
-                                    value: ard.getBool()[n+nn],
-                                    onChanged: (value) {
-                                      setState(() {
-                                        ard.getBool()[n+nn] = value!;
-                                      });
-                                    }
-                                ),
-                              ),
                             ),
-                          ],
-                        ],
+                            onPressed: (){
+                              setState(() {
+                                ard.getBool()[n] = !ard.getBool()[n];
+                              });
+
+                            },
+                            child: Text(ard.getValue()[n],style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
+                          ),
+                        ),
                       ],
                     ],
                   ),
-                ],
-                for(int n = 17 ; n < 20 ; n++ )...[
-                  Container(
+                ),
+                Container(
+                    margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
                     width: 320,
-                    margin: const EdgeInsets.fromLTRB(0, 3, 0, 3),
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius:  BorderRadius.only(
-                          bottomLeft:Radius.circular(50),
-                          topLeft:Radius.circular(50),
-                          topRight: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+
+                      color: Colors.white,
+                      boxShadow: const [
+                        BoxShadow(
+                            color:Colors.black12,
+                            blurRadius: 2,
+                            spreadRadius: 2,
+                            offset: Offset(4,4)
                         )
+                      ],
                     ),
-                    child:Transform.scale(
-                      scale:1.1,
-                      child: CheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          title: Transform.translate(
-                            offset: const Offset(-15,0),
-                            child:Text(ard.getValue()[n],style: const TextStyle(fontSize: 20)),
+                  child: Column(
+                    children: [
+                      if(widget.PageFlag == 'ChooseUser' || widget.PageFlag =='SettingUser')...[
+                        Container(
+                          width: 290,
+                          height: 70,
+                          margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                          padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
+                          child:ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                                shape:RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                elevation: 7
+                            ),
+                            onPressed:(){
+                              _selectAdd();
+                              Future.delayed(const Duration(seconds: 1)).then((_) {
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context) {
+                                      return StateAnother_ingredient(
+                                          PageFlag: widget.PageFlag,PageCount: widget.PageCount+1);
+                                    })
+                                );
+                              });
+                            },
+                            child: const Text('登録済み成分',
+                                style: TextStyle(
+                                  fontSize: 23,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center),
                           ),
-                          value: ard.getBool()[n],
-                          onChanged: (value) {
-                            setState(() {
-                              ard.getBool()[n] = value!;
-                            });
-                          }
-                      ),
-                    ),
-                  ),
-                ],
-                if(widget.PageFlag == 'ChooseUser' || widget.PageFlag =='SettingUser')...[
-                  Container(
-                    width: 290,
-                    height: 70,
-                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                    padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
-                    child:ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          shape:RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                        ),
+                      ],
+                      Container(
+                        width: 290,
+                        height: 70,
+                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                        padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
+                        child:  ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.orange[700],
+                              shape:RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              elevation: 7
                           ),
-                          elevation: 7
-                      ),
-                      onPressed:(){
-                        _selectAdd();
-                        Future.delayed(const Duration(seconds: 1)).then((_) {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) {
-                                return StateAnother_ingredient(
-                                    PageFlag: widget.PageFlag,PageCount: widget.PageCount+1);
-                              })
-                          );
-                        });
-                      },
-                      child: const Text('登録済み成分を選択',
-                          style: TextStyle(
+                          onPressed:(){
+                            if(widget.PageFlag == 'ChooseUser'){
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context){
+                                    return const StateImageLoderSelect();
+                                  })
+                              );
+                            }else if(widget.PageFlag == 'CreateUser' || widget.PageFlag =='SettingUser'){
+                              //なおしたいNamdpush
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                            }
+                            debugPrint(widget.PageFlag.toString());
+                            aod.HanteiObligation();
+                            ard.HanteiRecommendation();
+                            aad.HanteiAnother();
+                          },
+                          child: const Text('決定',style: TextStyle(
                             fontSize: 23,
                             fontWeight: FontWeight.bold,
                           ),
-                          textAlign: TextAlign.center),
-                    ),
-                  ),
-                ],
-                Container(
-                  width: 290,
-                  height: 70,
-                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 40),
-                  padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
-                  child:  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange[700],
-                        shape:RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                              textAlign: TextAlign.center),
                         ),
-                        elevation: 7
-                    ),
-                    onPressed:(){
-                      if(widget.PageFlag == 'ChooseUser'){
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context){
-                              return const StateImageLoderSelect();
-                            })
-                        );
-                      }else if(widget.PageFlag == 'CreateUser' || widget.PageFlag =='SettingUser'){
-                        //なおしたいNamdpush
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pop();
-                      }
-                      debugPrint(widget.PageFlag.toString());
-                      aod.HanteiObligation();
-                      ard.HanteiRecommendation();
-                      aad.HanteiAnother();
-                    },
-                    child: const Text('決定',style: TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold,
-                    ),
-                        textAlign: TextAlign.center),
+                      )
+                    ],
                   ),
-                )
+
+
+                ),
+
+
               ],
             ),
           ),
