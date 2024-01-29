@@ -11,8 +11,11 @@ import 'api.dart';
 class verifications{
   verifications._();
   static final verifications instance = verifications._();
-  List<String> select = [];
+  List<String> select = [];	//チェックボックスに表示してる文字を格納
+  List<String> others = [];	//その他の文字を格納
   int userid = 0;
+  List<String> resultfood = [];
+
   // 文字認識結果とユーザ選択成分の照合
   Future<List<String>> verification() async{
     Database db = await DBProvider.instance.database;
@@ -48,12 +51,14 @@ class verifications{
         }
         debugPrint('最終的にfoodNameValueに入れた内容：$foodNameValue');
       }
-      select.addAll(foodNameValue);
-      print("登録された義務と推奨結合：$select");
+      others.addAll(foodNameValue);
+      print("otherにいれてみた：$others");
 
       //とあるユーザがリスト表に登録しているaddidを取得
       final addid = await db.rawQuery('SELECT addid FROM list where userid = ?', [userid]);
       print("addid確認：$addid");
+
+      /*先にひらがなのみselectにaddして、kanji,eigo,otherNameを後で格納する形にする*/
 
       //addidをもとにname
       for (Map<String, dynamic?> ADD in addid) {
@@ -79,6 +84,7 @@ class verifications{
       select.addAll(await AllRecommendationData().getValueCheck2());
       select.addAll(await AllAnotherData().getValueCheck3());
 
+      //以降で持ってきた文字はothersに格納する
       print("Foodselect呼び出す");
       List<String> foodSelect = await Foodselect();
       select.addAll(foodSelect);
@@ -111,8 +117,51 @@ class verifications{
     }if(result.isEmpty){
       result.add("No");
     }
-    print("表示2：$result");
-    return result;
+
+    print("これからチェックボックスに表示されている文字を抽出するよ：$result");
+
+    List<String> selHira = [];
+
+    //追加成分
+    for (int i = 0; i < result.length; i++) {
+      final selHiraQuery = await db.rawQuery('''SELECT hiragana FROM k_add WHERE hiragana = ? OR kanji = ? OR eigo = ? OR otherName = ?''', [result[i], result[i], result[i], result[i]]);
+      for (Map<String, dynamic> row in selHiraQuery) {
+        if (!selHira.contains(row['hiragana'].toString())) {
+          selHira.add(row['hiragana'].toString());
+        }
+      }
+    }
+
+    //表示義務推奨
+    for(int i = 0; i < result.length; i++){
+      final foodName = result[i];
+      final foodQuery = await db.rawQuery('SELECT foodid FROM food WHERE foodname = ?', [foodName]);
+
+      for (Map<String, dynamic> row in foodQuery) {
+        final foodId = row['foodid'].toString();
+        final selId = foodId.substring(0, 2); // 左側二文字を抽出
+
+        Map<String, String> id = {};
+        id.addAll(AllObligationData.Gimu);
+        id.addAll(AllRecommendationData.Sui);
+        final targetId = id.keys.firstWhere((key) => id[key] == foodName, orElse: () => '');
+
+        if (targetId.contains(selId)) { // targetId に selId が含まれているか確認
+          resultfood.add(foodName);
+        }
+        print("現状のresultfood$resultfood");
+      }
+
+    }
+
+    resultfood.addAll(selHira);
+
+    print("これをかえすよ$resultfood");
+    return resultfood;
+  }
+
+  List<String> getResultfood(){
+    return resultfood;
   }
 
   //ユーザ選択された時

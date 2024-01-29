@@ -16,12 +16,16 @@ class Api{
 
   Future<void> postData(XFile img) async {
     print("パス：" + img.path);
-    File file = File(img.path);
-    // 画像のバイナリデータを読み込みます.
-    ByteData data = await file.readAsBytes().then((bytes) =>
-        ByteData.sublistView(Uint8List.fromList(bytes)));
-    List<int> imageBytes = data.buffer.asUint8List(); // 修正
 
+    // 型Fileのfileに画像パスを格納
+    File file = File(img.path);
+    // 画像のバイナリデータを読み込む
+    ByteData data = await file.readAsBytes().then((bytes) =>
+                          ByteData.sublistView(Uint8List.fromList(bytes)));
+    // List変換
+    List<int> imageBytes = data.buffer.asUint8List();
+
+    // Azureにリクエスト送信。responseを変数に格納
     var response = await http
         .post(Uri.parse(
         'https://r05-jk3a15cognitive.cognitiveservices.azure.com/computervision/imageanalysis:analyze?language=ja&api-version=2023-02-01-preview&features=read'),
@@ -31,6 +35,8 @@ class Api{
         },
         body: imageBytes
     );
+
+    //responseの値をjson形式に変更
     Map<String, dynamic> jsonDataMap = json.decode(response.body);
     // "content"フィールドの値を取得
     String content = jsonDataMap['readResult']['content'];
