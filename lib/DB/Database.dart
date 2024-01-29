@@ -24,7 +24,7 @@ class DBProvider {
     debugPrint("_initDatabaseにきました");
 
     Directory documentDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentDirectory.path, 'test2.db');
+    String path = join(documentDirectory.path, 'test3.db');
     return await openDatabase(
       path,
       version: 1,
@@ -65,6 +65,9 @@ class DBProvider {
         CREATE TABLE beauty(
           beautyid TEXT PRIMARY KEY,
           beautyname TEXT,
+          kanji TEXT,
+          eigo TEXT,
+          otherName TEXT,
           categoryid TEXT,
           FOREIGN KEY(categoryid) REFERENCES category(categoryid)
         )
