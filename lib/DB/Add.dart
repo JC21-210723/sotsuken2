@@ -70,6 +70,7 @@ class DBadd{
         }
       });
     }
+    AddList.sort((a,b) => a.length.compareTo(b.length));
     debugPrint('最終的にAddListに入れた内容：$AddList');
     return AddList;
   }
@@ -119,6 +120,7 @@ class DBadd{
         }
       }
     }
+    userAddList.sort((a,b) => a.length.compareTo(b.length));
     debugPrint('最終的にuserAddListに入れた内容：$userAddList');
     return userAddList;
   }
