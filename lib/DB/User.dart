@@ -15,7 +15,10 @@ class DBuser{
       return await db.insert('user', row.toMap());
     }else if(Home_Page.flagCategory == 'beauty'){
       debugPrint("beautyです");
-      return await db.insert('user2', row.toMap());
+      Map<String, String> toMap = {
+        "username2":AllUserData.sUserName,
+      };
+      return await db.insert('user2',toMap);
     }
   }
 
