@@ -51,7 +51,7 @@ class DBlist{
       return await db.insert('list', {'userid': userid,'userid2': '--','foodid': '--','beautyid': '--', 'addid': addid});
     }else if(Home_Page.flagCategory == 'beauty') {
       debugPrint("beautyです");
-      return await db.insert('list', {'userid': '--','userid2': userid,'foodid': '--','beautyid': '--', 'addid': addid});
+      return await db.insert('list', {'userid': '--','userid2': userid,'foodid': '--','beautyid': addid, 'addid': '--'});
     }
   }
 
