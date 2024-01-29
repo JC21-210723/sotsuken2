@@ -64,6 +64,8 @@ class DBadd{
         for (int x = 0; x < ad.length; x++) {
           if (key == 'hiragana') {
             AddList.add(value as String); // hiraganaを1件ずつ格納
+          }if(key == 'beautyname'){
+            AddList.add(value as String); // hiraganaを1件ずつ格納
           }
         }
       });
