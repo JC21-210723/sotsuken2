@@ -14,7 +14,7 @@ class DBadd{
       return await db.insert('k_add', {'userid': 0, 'hiragana': hiragana, 'kanji': kanji, 'eigo': eigo, 'otherName': otherName, 'categoryid': 'TS'});
     }else if(Home_Page.flagCategory == 'beauty') {
       debugPrint("beautyです");
-      return await db.insert('beauty', {'beautyid': 0, 'beautyname': hiragana, 'kanji': kanji, 'eigo': eigo, 'otherName': otherName, 'categoryid': 'BH'});
+      return await db.insert('beauty', {'beautyname': hiragana, 'kanji': kanji, 'eigo': eigo, 'otherName': otherName, 'categoryid': 'BH'});
     }
   }
 
@@ -92,6 +92,7 @@ class DBadd{
     }else if(Home_Page.flagCategory == 'beauty') {
       debugPrint("beautyです");
       addidlist = await db.rawQuery('select beautyid from list where userid2 = ?', [userid]);
+      debugPrint("beautyidは：$addidlistです");
     }
     for (Map<String, dynamic?> add in addidlist) {
       add.forEach((key, value) {
