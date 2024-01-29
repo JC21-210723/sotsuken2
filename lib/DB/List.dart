@@ -66,7 +66,7 @@ class DBlist{
       debugPrint('削除する食品ユーザのidを特定$deleteuserid');
     }else if(Home_Page.flagCategory == 'beauty') {
       debugPrint("beautyです");
-      final List<Map<String, dynamic>> deleteuserid = await db.query('user2', where: 'username2 = ?', whereArgs: [username]);//削除対象のuseridの特定
+      deleteuserid = await db.query('user2', where: 'username2 = ?', whereArgs: [username]);//削除対象のuseridの特定
       debugPrint('削除する美容ユーザのidを特定$deleteuserid');
     }
     for (Map<String, dynamic?> userMap in deleteuserid) {
