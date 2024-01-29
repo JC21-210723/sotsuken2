@@ -12,14 +12,14 @@ class DBfood{
   Future<int> insertfood(int userid ,String checkKey) async {
     debugPrint("insertfoodにきました");
     Database db = await DBProvider.instance.database;
-    return await db.insert('list', {'userid': userid, 'foodid': checkKey,'beautyid': '--', 'addid': 0});
+    return await db.insert('list', {'userid': userid, 'userid2': '--', 'foodid': checkKey,'beautyid': '--', 'addid': 0});
   }
 
   //表示推奨の追加処理
   Future<int> insertfood2(int userid ,String checkKey) async {
     debugPrint("insertfood2にきました");
     Database db = await DBProvider.instance.database;
-    return await db.insert('list', {'userid': userid, 'foodid': checkKey,'beautyid': '--', 'addid': 0});
+    return await db.insert('list', {'userid': userid, 'userid2': '--', 'foodid': checkKey,'beautyid': '--', 'addid': 0});
   }
 
 
