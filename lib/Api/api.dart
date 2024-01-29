@@ -43,7 +43,7 @@ class Api{
     String genStr = "";
 
     if (contentMoji.contains("原材料")) {
-      //原材料後、内容量までをString型で保持
+      //原材料後、内容量までを保持
       RegExp genNai = RegExp(r"原材料名(.*?)[內内]容量(.*)");
       RegExp gen = RegExp(r"原材料名(.*)");
       RegExpMatch? matchGenNai = genNai.firstMatch(contentMoji);
@@ -67,10 +67,7 @@ class Api{
     //、を見つけるまでを1要素として配列に格納する
     contentList = genStr.split('、');
     debugPrint("読み込んだ文字：$contentList");
-
-    result();
   }
-
   List<String> getContentList(){
     return contentList;
   }
@@ -109,7 +106,6 @@ class Api{
     print("追加成分結合後:$foodNames");
 
 
-    //　↓リスト型で回す
     for(String foods in foodNames){
       for(String s in ocrResult) {
         if (s.contains(foods)) {

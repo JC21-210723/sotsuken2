@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:sotsuken2/Data/AllAnotherData.dart';
 
 import '../DB/Add.dart';
 import '../DB/Food.dart';
 import '../DB/List.dart';
-import 'SettingUserNameChange.dart';
-import 'SettingUserDelete.dart';
-import 'SettingUserAllergy.dart';
 
-import 'package:sotsuken2/Data/AllRecommendationData.dart';
-import 'package:sotsuken2/Data/AllObligationData.dart';
+import '../ui/SettingUserNameChange.dart';
+import '../ui/SettingUserDelete.dart';
+import '../ui/SettingUserAllergy.dart';
+import '../Data/AllObligationData.dart';
+import '../Data/AllRecommendationData.dart';
+import '../Data/AllAnotherData.dart';
+import '../component/AppbarComp.dart';
+import '../component/BottomNavbarComp.dart';
 
 class StateUserSettings2 extends StatefulWidget{
   final String UserName;
-  const StateUserSettings2(this.UserName);
+  const StateUserSettings2(this.UserName, {super.key});
 
   @override
   State<StateUserSettings2> createState(){
@@ -29,160 +31,234 @@ class UserSettings2 extends State<StateUserSettings2> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('成分チェッカー'),
+    return Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors:[Colors.white,Color(0xFFFAAC90)],
+        )
       ),
-      body: Center(
-          child: SingleChildScrollView(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin:const EdgeInsets.fromLTRB(0, 10, 0, 15),
-                      padding:const EdgeInsets.fromLTRB(40, 10, 40, 10),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.deepOrange,
-                          width: 1,
-                        ),
-                      ),
-                      child:const Text('ユーザー設定',
-                        style: TextStyle(
-                            fontSize: 30,
-                            color:Colors.deepOrange,
-                            fontWeight: FontWeight.bold
-                        ),
+      child:Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppbarComp(),
+        bottomNavigationBar: const BottomNavbarCompState(flagName: 'none', text: 'ユーザーごとの設定が行えます。変更したい項目を選択してください。',),
+        body: Center(
+          child:Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 300,
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                        color:Colors.black12,
+                        blurRadius: 2,
+                        spreadRadius: 2,
+                        offset: Offset(4,4)
+                    )
+                  ],
+                ),
+                child:Container(
+                  alignment: Alignment.bottomLeft,
+                  margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                  padding: const EdgeInsets.fromLTRB(10, 7, 0, 7),
+                  child:  FittedBox(
+                    child:RichText(
+                      text:const TextSpan(
+                          children: [
+                            TextSpan(
+                              text:'| ',
+                              style: TextStyle(
+                                  fontSize: 35,
+                                  color:Colors.deepOrange,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            TextSpan(
+                              text:'ユーザー設定',
+                              style: TextStyle(
+                                  fontSize: 27,
+                                  color:Colors.deepOrange,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ]
                       ),
                     ),
-                    Container(
-                      width: 280,
-                      height: 60,
-                      margin: const EdgeInsets.all(5),
-                      decoration: const BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                                color:Colors.deepOrangeAccent
-                            )
-                        ),
-                      ),
+                  ),
+                ),
+              ),
 
-                      child: Row(
+              Container(
+                  width: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(
+                          color:Colors.black12,
+                          blurRadius: 2,
+                          spreadRadius: 2,
+                          offset: Offset(7,7)
+                      )
+                    ],
+                  ),
+                child: SingleChildScrollView(
+                    child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const SizedBox(
-                            width:60,
-                            child: Icon(
-                              Icons.account_box,
-                              color: Colors.redAccent,
-                              size:50,
+                          Container(
+                            width: 280,
+                            height: 60,
+                            margin: const EdgeInsets.fromLTRB(5,10,5,5),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      color:Colors.deepOrangeAccent
+                                  )
+                              ),
+                            ),
+
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const SizedBox(
+                                  width:60,
+                                  child: Icon(
+                                    Icons.account_box,
+                                    color: Colors.redAccent,
+                                    size:45,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 220,
+                                  child:Text(widget.UserName,style: const TextStyle(fontSize: 22),textAlign: TextAlign.center,),
+                                )
+                              ],
                             ),
                           ),
-                          SizedBox(
-                            width: 220,
-                            child:Text(widget.UserName,style: const TextStyle(fontSize: 25),textAlign: TextAlign.center,),
-                          )
-                        ],
-                      ),
-                    ),
 
 
-                    Container(
-                      width:270,
-                      height:50,
-                      margin: const EdgeInsets.fromLTRB(20, 25, 20, 20),
-                      child:ElevatedButton(
-                        style:ElevatedButton.styleFrom(
-                            backgroundColor: Colors.deepOrangeAccent
-                        ),
-                        child: const Text('ユーザー名の変更',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-                        onPressed: (){
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context){
-                                return StateSettingUserNameChange(widget.UserName);
-                              })
-                          );
-                        },
-                      ),
+                          Container(
+                            width:250,
+                            height:50,
+                            margin: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                            child:ElevatedButton(
+                              style:ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.deepOrangeAccent,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)
+                                  ),
+                                  elevation: 7
+                              ),
+                              child: const Text('ユーザー名の変更',style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold),),
+                              onPressed: (){
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context){
+                                      return StateSettingUserNameChange(widget.UserName);
+                                    })
+                                );
+                              },
+                            ),
 
-                    ),
-                    Container(
-                      width:270,
-                      height:50,
-                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                      child:ElevatedButton(
-                        style:ElevatedButton.styleFrom(
-                            backgroundColor: Colors.deepOrangeAccent
-                        ),
-                        child: const Text('アレルゲンの変更',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-                        onPressed: (){
-                          //aod.AllResetObligation();
-                          //ard.AllResetRecommendation();
-                          _selectGimu();//追加した処理12/21
-                          aad.setValueList3();
-                          aod.setValueCheck(DBfood.Gimulist);
-                          ard.setValueCheck2(DBfood.Suilist);
-                          aad.setValueCheck3(DBadd.userAddList);
-
-                          Future.delayed(const Duration(seconds: 1)).then((_){
-                            Navigator.of(context).push(
-                                MaterialPageRoute(builder: (context){
-                                  return StateSettingAllergy(widget.UserName);
-                                })
-                            );
-                          });
-                        },
-                      ),
-
-                    ),
-                    Container(
-                      width:270,
-                      height:50,
-                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                      child:ElevatedButton(
-                        style:ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red
-                        ),
-                        child: const Text('ユーザーの削除',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-                        onPressed: (){
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context){
-                                return StateSettingUserDelete(widget.UserName);
-                              })
-                          );
-                        },
-                      ),
-
-                    ),
-
-                    Container(
-                      width:290,
-                      height:90,
-                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 25),
-                      child:OutlinedButton(
-                        style:OutlinedButton.styleFrom(
-                          side: const BorderSide(
-                              color: Colors.deepOrange
                           ),
-                        ),
-                        child: const Text('ユーザー選択画面に\n戻る',
-                          style: TextStyle(
-                            color:Colors.deepOrange,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        onPressed: (){
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pop();
-                        },
-                      ),
+                          Container(
+                            width:250,
+                            height:50,
+                            margin: const EdgeInsets.fromLTRB(20, 0, 20, 15),
+                            child:ElevatedButton(
+                              style:ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.deepOrangeAccent,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)
+                                  ),
+                                  elevation: 7
+                              ),
+                              child: const Text('アレルゲンの変更',style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold),),
+                              onPressed: (){
+                                //aod.AllResetObligation();
+                                //ard.AllResetRecommendation();
+                                _selectGimu();//追加した処理12/21
+                                aad.setValueList3();
+                                aod.setValueCheck(DBfood.Gimulist);
+                                ard.setValueCheck2(DBfood.Suilist);
+                                aad.setValueCheck3(DBadd.userAddList);
 
-                    ),
-                  ]
-              )
-          )
+                                Future.delayed(const Duration(seconds: 1)).then((_){
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context){
+                                        return StateSettingAllergy(widget.UserName);
+                                      })
+                                  );
+                                });
+                              },
+                            ),
+
+                          ),
+                          Container(
+                            width:250,
+                            height:50,
+                            margin: const EdgeInsets.fromLTRB(20, 0, 20, 30),
+                            child:ElevatedButton(
+                              style:ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)
+                                  ),
+                                  elevation: 7
+                              ),
+                              child: const Text('ユーザーの削除',style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold),),
+                              onPressed: (){
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context){
+                                      return StateSettingUserDelete(widget.UserName);
+                                    })
+                                );
+                              },
+                            ),
+
+                          ),
+                      /*
+                          Container(
+                            width:290,
+                            height:80,
+                            margin: const EdgeInsets.fromLTRB(20, 10, 20, 25),
+                            child:ElevatedButton(
+                              style:ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.orange,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)
+                                  ),
+                                  elevation: 7
+                              ),
+                              child: const Text('ユーザー選択画面に\n戻る',
+                                style: TextStyle(
+                                  color:Colors.white,
+                                  fontSize: 23,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              onPressed: (){
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                              },
+                            ),
+
+                          ),
+
+                       */
+                        ]
+                    )
+                )
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

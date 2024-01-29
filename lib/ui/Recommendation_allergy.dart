@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:sotsuken2/Data/AllObligationData.dart';
-import 'package:sotsuken2/Data/AllAnotherData.dart';
-import 'package:sotsuken2/Data/AllRecommendationData.dart';
-import 'package:sotsuken2/ui/ImageLoaderSelect.dart';
-import '../DB/Add.dart';
-import 'Another_ingredient.dart';
 
+import '../DB/Add.dart';
+
+import '../ui/Another_ingredient.dart';
+import '../ui/ImageLoaderSelect.dart';
+import '../Data/AllObligationData.dart';
+import '../Data/AllAnotherData.dart';
+import '../Data/AllRecommendationData.dart';
+import '../component/AppbarComp.dart';
 
 class StateRecommendation_allergy extends StatefulWidget{
   final String PageFlag;
@@ -27,9 +29,7 @@ class Recommendation_allergy extends State<StateRecommendation_allergy> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('成分チェッカー'),
-      ),
+      appBar: AppbarComp(),
       body: Center(
         child:SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -39,6 +39,7 @@ class Recommendation_allergy extends State<StateRecommendation_allergy> {
                 margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                 padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
                 decoration:BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(
                     color:Colors.indigo,
                     width: 1,
@@ -136,12 +137,13 @@ class Recommendation_allergy extends State<StateRecommendation_allergy> {
                   height: 70,
                   margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                   padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
-                  child:OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.indigo, side: const BorderSide(
-                      color: Colors.indigoAccent,
-                      width: 1.5,
-                    )
+                  child:ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape:RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        elevation: 7
                     ),
                     onPressed:(){
                       _selectAdd();
@@ -168,12 +170,13 @@ class Recommendation_allergy extends State<StateRecommendation_allergy> {
                 height: 70,
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 40),
                 padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
-                child:  OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.deepOrange, side: const BorderSide(
-                    color: Colors.deepOrange,
-                    width: 1.5,
-                  )
+                child:  ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange[700],
+                      shape:RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      elevation: 7
                   ),
                   onPressed:(){
                     if(widget.PageFlag == 'ChooseUser'){

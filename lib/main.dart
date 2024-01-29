@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'DB/Add.dart';
 import 'DB/User.dart';
-import 'Data/AllAnotherData.dart';
+
 import 'ui/SettingUser1.dart';
 import 'ui/ChooseUser.dart';
 import 'ui/Manual.dart';
+import 'Data/AllAnotherData.dart';
+import 'component/AppbarComp.dart';
+import 'component/BottomNavbarComp.dart';
 
 
 void main() {
@@ -18,7 +22,7 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title:'タイトル',
+        title:'成分チェッカー',
         theme: ThemeData(
           primaryColor: Colors.blue,
         ),
@@ -30,7 +34,16 @@ class MyApp extends StatelessWidget{
             return const StateUserSettings1();
           },
         },
-        home: Home_Page_State(),
+        home:Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors:[Colors.white,Color(0xFF90D4FA)],
+            )
+          ),
+          child:Home_Page_State(),
+        ),
     );
   }
 }
@@ -43,33 +56,39 @@ class Home_Page_State extends StatefulWidget{
 
 class Home_Page extends State<Home_Page_State>{
   AllAnotherData aad = AllAnotherData();
-  bool buttonBool = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 60,
-        title: const Text('成分チェッカー'),
-      ),
+      backgroundColor: Colors.transparent,
+      appBar: AppbarComp(),
+      bottomNavigationBar: const BottomNavbarCompState(flagName: 'main', text: 'まずは、ご利用になる品目を選択してください。'),
       body: Center(
 
         child:Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children:<Widget>[
               Container(
-                height:500,
-                decoration:const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('images/milk.png'),
-                      fit:BoxFit.contain
-                  ),
+                width: 300,
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                      color:Colors.black12,
+                      blurRadius: 2,
+                      spreadRadius: 2,
+                      offset: Offset(7,7)
+                    )
+                  ],
                 ),
                 child:Column(
                     children: [
                       Container(
-                        margin: const EdgeInsets.fromLTRB(30,50,30,40),
+                        margin: const EdgeInsets.fromLTRB(30,30,30,15),
                         decoration: BoxDecoration(
                           color:Colors.white,
+                          borderRadius: BorderRadius.circular(5),
                           border: Border.all(
                             color: Colors.indigo,
                             width: 1,
@@ -80,6 +99,7 @@ class Home_Page extends State<Home_Page_State>{
                             padding: const EdgeInsets.fromLTRB(25,15,25,15),
                             decoration: BoxDecoration(
                               color:Colors.white,
+                              borderRadius: BorderRadius.circular(5),
                               border: Border.all(
                                 color: Colors.indigo,
                                 width: 1,
@@ -96,63 +116,119 @@ class Home_Page extends State<Home_Page_State>{
                             )
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(20),
-                        height: 55,
-                        width: 210,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.indigo
-                          ),
-                          child: const Text('食品',style: TextStyle(fontSize: 30),),
-                          onPressed: buttonBool ? (){
-                            futureReverseBool();
-                            _selectlistUser();
-                            Future.delayed(const Duration(seconds: 1)).then((_){
-                              Navigator.pushNamed(context, 'ChooseUser_page');
-                              futureReverseBool();
-                              aad.AllResetAnother();
-                            });
-                          } : null,
-                        ),
-                      ),
-                      Container(
-                          margin: const EdgeInsets.all(20),
-                          height: 55,
-                          width: 210,
-                          child:ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.indigo
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:[
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            height: 170,
+                            width: 120,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.black26,width: 3)
                             ),
-                            onPressed: buttonBool ? (){
-                              futureReverseBool();
-                              //_selectlistUser();
-                              Future.delayed(const Duration(seconds: 1)).then((_){
-                                //Navigator.pushNamed(context, 'ChooseUser_page');
-                                futureReverseBool();
-                              });
-                            } : null,
-                            child: const Text('美容',style: TextStyle(fontSize: 30),),
-                          )
+                            child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                side: const BorderSide(
+                                  color: Colors.white,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                backgroundColor: Colors.white,
+                                elevation:7
+                              ),
+                               child:Column(
+                                children: [
+                                   Container(
+                                     margin: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                                     height: 113,
+                                     child:Image.asset(
+                                       'images/milk.png',
+                                       fit: BoxFit.fitWidth,
+                                     ),
+                                   ),
+                                  const Text('食品',
+                                    style: TextStyle(
+                                        fontSize: 27,color: Colors.indigo,
+                                    ),
+                                  )
+                                ],
+                               ),
+                                onPressed:(){
+                                  _selectlistUser();
+                                  Future.delayed(const Duration(seconds: 1)).then((_){
+                                    Navigator.pushNamed(context, 'ChooseUser_page');
+                                  });
+                                }
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            height: 170,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.black26,width: 3)
+                            ),
+                            child: OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(
+                                      color: Colors.white,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    backgroundColor: Colors.white,
+                                    elevation:7
+                                ),
+                                child:Column(
+                                  children: [
+                                    Container(
+                                      height: 113,
+                                      margin: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                                      child:Image.asset(
+                                          'images/founda.png',
+                                          fit: BoxFit.fitWidth,
+                                      ),
+                                    ),
+                                    const Text('美容',
+                                      style: TextStyle(
+                                        fontSize: 27,color: Colors.indigo,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                onPressed:(){
+                                  //_selectlistUser();
+                                  Future.delayed(const Duration(seconds: 1)).then((_){
+                                    //Navigator.pushNamed(context, 'ChooseUser_page');
+                                  });
+                                }
+                            ),
+                          ),
+                        ],
                       ),
-
                       Container(
-                        margin: const EdgeInsets.fromLTRB(0,30,0,20),
+                        margin: const EdgeInsets.fromLTRB(0,20,0,30),
                         //padding:const EdgeInsets.fromLTRB(20, 5, 20, 5),
-                        height: 50,
+                        height: 45,
                         width: 210,
-                        color: Colors.white,
-                        child:OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                              side: const BorderSide(
-                                  color:Colors.deepOrange
-                              )
+                        child:ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.orange,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)
+                            ),
+                            elevation: 7
                           ),
-                          child: const Text('ご利用方法',
-                              style: TextStyle(fontSize: 25,
-                                  color:Colors.deepOrange
-                              )
-                          ),
+                          icon: Icon(Icons.import_contacts,color: Colors.white,),
+                          label: const Text('ご利用方法',
+                                style: TextStyle(fontSize: 25,
+                                  color:Colors.white,
+                                  fontWeight:FontWeight.bold,
+                                )
+                            ),
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context){
@@ -170,12 +246,6 @@ class Home_Page extends State<Home_Page_State>{
         ),
       ),
     );
-  }
-
-  futureReverseBool(){
-      setState(() {
-        buttonBool = !buttonBool;
-      });
   }
 
   DBuser dbUser = DBuser();//DBクラスのインスタンス生成

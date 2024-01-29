@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sotsuken2/Data/AllAnotherData.dart';
 
 import '../DB/Add.dart';
+
+import '../Data/AllAnotherData.dart';
+import '../component/AppbarComp.dart';
 
 class StateAddAnotherIngredient extends StatefulWidget{
   final String PageFlag;
@@ -27,9 +29,7 @@ class AddAnotherIngredient extends State<StateAddAnotherIngredient>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar:AppBar(
-        title:const Text('成分チェッカー'),
-      ),
+      appBar:AppbarComp(),
       body: Center(
           child:SingleChildScrollView(
             child:Column(
@@ -39,6 +39,7 @@ class AddAnotherIngredient extends State<StateAddAnotherIngredient>{
                     margin:const EdgeInsets.fromLTRB(0, 30, 0, 15),
                     padding:const EdgeInsets.fromLTRB(40, 7, 40, 7),
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         color: Colors.indigo,
                         width: 1,
@@ -78,6 +79,7 @@ class AddAnotherIngredient extends State<StateAddAnotherIngredient>{
                         Container(
                           padding:EdgeInsets.fromLTRB(5, 3, 5, 3),
                           decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
                             color:Colors.white,
                             border: Border.all(
                               color: Colors.indigo,
@@ -127,6 +129,7 @@ class AddAnotherIngredient extends State<StateAddAnotherIngredient>{
                         width:90,
                         padding:EdgeInsets.fromLTRB(7, 3, 7, 3),
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
                           color:Colors.white,
                           border: Border.all(
                             color: Colors.indigo,
@@ -165,6 +168,7 @@ class AddAnotherIngredient extends State<StateAddAnotherIngredient>{
                         width:90,
                         padding:EdgeInsets.fromLTRB(7, 3, 7, 3),
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
                           color:Colors.white,
                           border: Border.all(
                             color: Colors.indigo,
@@ -203,6 +207,7 @@ class AddAnotherIngredient extends State<StateAddAnotherIngredient>{
                         width:90,
                         padding:EdgeInsets.fromLTRB(7, 3, 7, 3),
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
                           color:Colors.white,
                           border: Border.all(
                             color: Colors.indigo,
@@ -242,9 +247,13 @@ class AddAnotherIngredient extends State<StateAddAnotherIngredient>{
                       margin: const EdgeInsets.fromLTRB(0, 15, 0, 30),
                       child:ElevatedButton(
                         style:ElevatedButton.styleFrom(
-                          backgroundColor: Colors.indigo,
+                            backgroundColor: Colors.blue,
+                            shape:RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            elevation: 7
                         ),
-                        child:const Text('登録',style: TextStyle(fontSize: 30),),
+                        child:const Text('登録',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
                         onPressed: (){
                           _insertAdd();//追加した処理12/21
                           aad.addMethod3(ingredientName);

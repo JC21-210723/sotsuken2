@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:sotsuken2/Data/AllObligationData.dart';
-import 'package:sotsuken2/Data/AllRecommendationData.dart';
-import 'package:sotsuken2/ui/ImageLoaderSelect.dart';
+
 import '../DB/Add.dart';
-import 'AddAnotherIngredient.dart';
-import 'package:sotsuken2/Data/AllAnotherData.dart';
+
+import '../ui/AddAnotherIngredient.dart';
+import '../ui/ImageLoaderSelect.dart';
+import '../Data/AllObligationData.dart';
+import '../Data/AllRecommendationData.dart';
+import '../Data/AllAnotherData.dart';
+import '../component/AppbarComp.dart';
 
 class StateAnother_ingredient extends StatefulWidget{
   final String PageFlag;
@@ -16,7 +19,6 @@ class StateAnother_ingredient extends StatefulWidget{
     return Another_ingredient();
   }
 }
-
 
 class Another_ingredient extends State<StateAnother_ingredient>{
   AllObligationData aod = AllObligationData();
@@ -39,9 +41,7 @@ class Another_ingredient extends State<StateAnother_ingredient>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:AppBar(
-          title: const Text('成分チェッカー'),
-        ),
+        appBar:AppbarComp(),
         body: Center(
             child:SingleChildScrollView(
                 child:Column(
@@ -52,6 +52,7 @@ class Another_ingredient extends State<StateAnother_ingredient>{
                         margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
                         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
                         decoration:BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
                           border: Border.all(
                             color:Colors.indigo,
                             width: 1,
@@ -142,13 +143,13 @@ class Another_ingredient extends State<StateAnother_ingredient>{
                         height: 90,
                         margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                         padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
-                        child:  OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.indigo,
-                              side: const BorderSide(
-                                color: Colors.blue,
-                                width: 1.5,
-                              )
+                        child:  ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              shape:RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              elevation: 7
                           ),
                           onPressed:(){
                             Navigator.of(context).push(
@@ -172,12 +173,13 @@ class Another_ingredient extends State<StateAnother_ingredient>{
                           height: 70,
                           margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
                           padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
-                          child:  OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.deepOrange, side: const BorderSide(
-                              color: Colors.deepOrange,
-                              width: 1.5,
-                            )
+                          child:  ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.orange[700],
+                                shape:RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                elevation: 7
                             ),
                             onPressed:(){
                               if(widget.PageFlag == 'ChooseUser'){
@@ -189,7 +191,7 @@ class Another_ingredient extends State<StateAnother_ingredient>{
 
                               }else if(widget.PageFlag == 'CreateUser'){
                                 Navigator.of(context).pop();
-                              }else if(widget.PageFlag == 'ChooseUser'){
+                              }else if(widget.PageFlag == 'ChooseUser' || widget.PageFlag == 'SettingUser'){
                                 debugPrint(widget.PageCount.toString());
                                 for(int n = 0 ; n <= widget.PageCount; n++){
                                   Navigator.of(context).pop();
@@ -213,12 +215,13 @@ class Another_ingredient extends State<StateAnother_ingredient>{
                           height: 70,
                           margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
                           padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
-                          child:  OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.deepOrange, side: const BorderSide(
-                              color: Colors.deepOrange,
-                              width: 1.5,
-                            )
+                          child:  ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red[400],
+                                shape:RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                elevation: 7
                             ),
                             onPressed:(){
                               _deleteAdd();

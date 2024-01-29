@@ -6,7 +6,7 @@ class DBlist{
 
   //-list処理一覧-
   //ユーザIDセレクト用
-  int selectid = 1; // 単一のint型変数として宣言
+  int selectid = 0; // 単一のint型変数として宣言
   Future<int> selectUserId(String sUserName) async {
     debugPrint("selectUserIdにきました");
     Database db = await DBProvider.instance.database;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'ManualAnotherAdd.dart';
-import 'ManualUserAdd.dart';
-import 'ManualAddChange.dart';
-import 'ManualDeleteUser.dart';
 
+import '../ui/ManualAnotherAdd.dart';
+import '../ui/ManualUserAdd.dart';
+import '../ui/ManualAddChange.dart';
+import '../ui/ManualDeleteUser.dart';
 
 class Manual_Page extends StatelessWidget{
   @override
@@ -34,7 +34,14 @@ class Manual_Page extends StatelessWidget{
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(15, 20, 15, 30),
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: const FittedBox(
+                  child: Text('-　-　-　-　-　-　-　-',style: TextStyle(color:Colors.orange,fontWeight:FontWeight.bold,fontSize: 30),),
+                ),
+              ),
+
+              Container(
+                margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
                 child: const FittedBox(
                   child:Text(
                     ' 本製品をご利用いただき、\nありがとうございます。'
@@ -50,30 +57,107 @@ class Manual_Page extends StatelessWidget{
                 ),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(15, 20, 15, 20),
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: const FittedBox(
+                  child: Text('-　-　-　-　-　-　-　-',style: TextStyle(color:Colors.orange,fontWeight:FontWeight.bold,fontSize: 30),),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 50, 20, 0),
                 alignment: Alignment.topLeft,
-                  /*
-                  child:  const Column(
-                    children: [
-                      Text('・ユーザーの登録について\n',
-                        style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)
-                        ,textAlign: TextAlign.start,
-                      ),Text('本製品はユーザー情報を登録して\nご利用いただけます。\n'
-                        'また、SKIPにて登録せずにご利用\nいただくこともできます。',
-                        style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),
-                      ),
-
-                    ]
+                child:FittedBox(
+                  child:RichText(
+                      text: const TextSpan(
+                          style: TextStyle(color:Colors.black,),
+                          children: [
+                            TextSpan(
+                                text:'<ご利用の際の注意事項>\n',
+                                style: TextStyle(color:Colors.red,fontSize: 23,fontWeight: FontWeight.bold,height: 0.3)
+                            ),
+                          ]
+                      )
                   ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                child:FittedBox(
+                  child: RichText(
+                    text: const TextSpan(
+                      style: TextStyle(color:Colors.black,),
+                        children: [
+                          TextSpan(
+                              text:'・ネットワークの接続について\n',
+                              style: TextStyle(color:Colors.deepOrange,fontSize: 25,fontWeight: FontWeight.bold,height: 2)
+                          ),
+                          TextSpan(
+                            text:'　AIサービスのご利用にあたって、\n　ネットワークが必要になります。\n'
+                                  '',
+                            style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),
+                          ),
 
-                   */
+                          TextSpan(
+                            text:'・ユーザーの登録について\n',
+                            style: TextStyle(color:Colors.deepOrange,fontSize: 25,fontWeight: FontWeight.bold,height: 2.5),
+                          ),
+                          TextSpan(
+                            text:'　本製品はユーザー情報を登録して\n　ご利用いただけます。\n'
+                                '　また、SKIPにて登録せずにご利用\n　いただくこともできます。\n',
+                            style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),
+                          ),
 
+                          TextSpan(
+                            text:'・追加成分の登録について\n',
+                            style: TextStyle(color:Colors.deepOrange,fontSize: 25,fontWeight: FontWeight.bold,height: 2.5),
+                          ),
+                          TextSpan(
+                            text:'　既存の項目以外のアレルゲンや、\n　苦手な成分をご登録いただけます。\n',
+                            style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),
+                          ),
+
+                          TextSpan(
+                            text:'・写真のトリミングについて\n',
+                            style: TextStyle(color:Colors.deepOrange,fontSize: 25,fontWeight: FontWeight.bold,height: 2.5),
+                          ),
+                          TextSpan(
+                            text:'　AIの精度を上げるため、原材料\n　または成分のみが映るように\n　トリミングを行ってください。',
+                            style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),
+                          ),
+                        ]
+                    ),
+
+                  ),
+                ),
 
               ),
               Container(
-                width:330,
-                height:55,
-                margin: const EdgeInsets.all(10),
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: const FittedBox(
+                  child: Text('-　-　-　-　-　-　-　-',style: TextStyle(color:Colors.orange,fontWeight:FontWeight.bold,fontSize: 30),),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+                alignment: Alignment.topLeft,
+                child:FittedBox(
+                  child:RichText(
+                    text: const TextSpan(
+                      style: TextStyle(color:Colors.black,),
+                      children: [
+                        TextSpan(
+                            text:'<その他の詳細説明>\n',
+                            style: TextStyle(color:Colors.red,fontSize: 23,fontWeight: FontWeight.bold,height: 1)
+                        ),
+                      ]
+                    )
+                  ),
+                ),
+              ),
+
+              Container(
+                width:300,
+                height:50,
+                margin: const EdgeInsets.fromLTRB(10,0,10,10),
                 child:OutlinedButton(
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(
@@ -87,12 +171,14 @@ class Manual_Page extends StatelessWidget{
                       })
                     );
                   },
-                  child: const Text('追加成分の登録について',style: TextStyle(color:Colors.deepOrange,fontSize: 25,fontWeight: FontWeight.bold),)
+                  child: const FittedBox(
+                     child:Text('追加成分の登録について',style: TextStyle(color:Colors.deepOrange,fontSize: 23,fontWeight: FontWeight.bold),)
+                  ),
                 )
               ),
               Container(
-                  width:330,
-                  height:55,
+                  width:300,
+                  height:50,
                   margin: const EdgeInsets.all(10),
                   child:OutlinedButton(
                       style: OutlinedButton.styleFrom(
@@ -107,12 +193,14 @@ class Manual_Page extends StatelessWidget{
                             })
                         );
                       },
-                      child: const Text('ユーザーの登録について',style: TextStyle(color:Colors.deepOrange,fontSize: 25,fontWeight: FontWeight.bold),)
+                      child: const FittedBox(
+                          child:Text('ユーザーの登録について',style: TextStyle(color:Colors.deepOrange,fontSize: 23,fontWeight: FontWeight.bold),)
+                      ),
                   )
               ),
               Container(
-                  width:330,
-                  height:55,
+                  width:300,
+                  height:50,
                   margin: const EdgeInsets.all(10),
                   child:OutlinedButton(
                       style: OutlinedButton.styleFrom(
@@ -127,12 +215,14 @@ class Manual_Page extends StatelessWidget{
                             })
                         );
                       },
-                      child: const Text('登録内容の変更について',style: TextStyle(color:Colors.deepOrange,fontSize: 25,fontWeight: FontWeight.bold),)
+                      child:const FittedBox(
+                          child: Text('登録内容の変更について',style: TextStyle(color:Colors.deepOrange,fontSize: 23,fontWeight: FontWeight.bold),)
+                      ),
                   )
               ),
               Container(
-                  width:330,
-                  height:55,
+                  width:300,
+                  height:50,
                   margin: const EdgeInsets.fromLTRB(10,10,10,50),
                   child:OutlinedButton(
                       style: OutlinedButton.styleFrom(
@@ -147,7 +237,9 @@ class Manual_Page extends StatelessWidget{
                             })
                         );
                       },
-                      child: const Text('ユーザーの削除について',style: TextStyle(color:Colors.deepOrange,fontSize: 25,fontWeight: FontWeight.bold),)
+                      child:const FittedBox(
+                          child: Text('ユーザーの削除について',style: TextStyle(color:Colors.deepOrange,fontSize: 23,fontWeight: FontWeight.bold),)
+                      ),
                   )
               ),
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../DB/Food.dart';
 import '../DB/List.dart';
-import '../DB/Database.dart';
 
 class AllObligationData{
 
@@ -10,7 +9,7 @@ class AllObligationData{
   static List<String> valueCheck = [];  //trueの名前
 
   //みちるちゃんの
-  static Map<String, String> Gimu = {"HG1":"えび", "HG2":"かに", "HG3":"くるみ", "HG4":"小麦", "HG5":"そば", "HG6":"卵", "HG7":"乳", "HG8":"落花生",};
+  static Map<String, String> Gimu = {"GA1":"えび", "GC1":"かに", "GB1":"くるみ", "GD2":"小麦", "GE1":"そば", "GF2":"卵", "GG1":"乳", "GH2":"落花生",};
   static List<String> CheckValue = []; // チェックされた食品名を格納
   static List<String> foodid = [];    // foodidをリストに格納
 
@@ -98,7 +97,7 @@ class AllObligationData{
     final int userid = await dbList.selectUserId(username);// ユーザーIDを非同期で取得
     debugPrint('useridの内容:$userid');
     for (int x = 0; x < foodid.length; x++) {
-      final result2 = await dbFood.insertfood(userid, foodid[x]);// ここでDBにuseridとCheckKeyを渡す（insert）
+      await dbFood.insertfood(userid, foodid[x]);// ここでDBにuseridとCheckKeyを渡す（insert）
       debugPrint('foodidの内容だよ:$foodid');
     }
     debugPrint(CheckValue.toString());

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:sotsuken2/Api/verification.dart';
-import 'package:sotsuken2/ui/ImageLoaderSelect.dart';
-import 'package:sotsuken2/ui/ReadIngredient.dart';
+
+import '../ui/ReadIngredient.dart';
+import '../component/AppbarComp.dart';
+import '../component/BottomNavbarComp.dart';
+
+import '../Api/verification.dart';
 
 class StateAllergyDetection extends StatefulWidget{
-  const StateAllergyDetection({super.key});
-
+ const StateAllergyDetection({super.key});
   @override
-  State<StateAllergyDetection> createState(){
-    return AllergyDetection_Page();
-  }
+  AllergyDetection_Page createState() => AllergyDetection_Page();
 }
 
 class AllergyDetection_Page extends State<StateAllergyDetection>{
@@ -41,151 +41,180 @@ class AllergyDetection_Page extends State<StateAllergyDetection>{
   @override
   Widget build(BuildContext context){
     print("AllergyDetectionにきた");
-    return Scaffold(
-      appBar: AppBar(
-          title: const Text('成分チェッカー')
+    return Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors:[Colors.white,Color(0xFF90D4FA)],
+        )
       ),
-      body: Center(
-          child:SingleChildScrollView(
-            child:Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:<Widget>[
+      child:Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppbarComp(),
+        bottomNavigationBar: const BottomNavbarCompState(flagName:'none',text: '選択したアレルゲンと\n一致したものを表示しています。閲覧後、移動したいページのボタンをクリックしてください。',),
+        body: Center(
+          child:Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 300,
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                        color:Colors.black12,
+                        blurRadius: 2,
+                        spreadRadius: 2,
+                        offset: Offset(4,4)
+                    )
+                  ],
+                ),
+                child:Container(
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                  child:  Container(
+                    alignment: Alignment.center,
+                    width: 250,
+                    padding: const EdgeInsets.fromLTRB(0, 12, 0, 7),
+                    decoration: const BoxDecoration(
+                      border:Border(
+                          bottom: BorderSide(
+                              color: Colors.orange
+                          )
+                      ),
+                    ),
 
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 15),
-                  decoration: BoxDecoration(
-                      border: Border.all(color:Colors.deepOrange)
-                  ),
-                  child: Container(
-                    margin: const EdgeInsets.all(5),
-                    padding: const EdgeInsets.fromLTRB(13, 10, 13, 10),
-                    color: Colors.deepOrange,
-                    child: const FittedBox(
-                      child:Text('検出されたアレルゲン',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color:Colors.white,
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(color:Colors.deepOrange,width: 1)
-                  ),
-                  child:Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color:Colors.deepOrange,width: 1)
-                    ),
-                    margin: const EdgeInsets.all(5),
-                    width: 300,
-                    height: 320,
-
-                    //ここが表示部分
-                    child:ListView.builder(
-                      itemCount: vals.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0)
-                              .copyWith(left: 5.0),
-                          child: Text(vals[index]),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 60,
-                  width: 300,
-                  margin: const EdgeInsets.all(10),
-                  child:OutlinedButton(
-                    style:OutlinedButton.styleFrom(
-                      side: const BorderSide(
-                        color: Colors.deepOrange,
-                      ),
-                    ),
-                    onPressed: (){
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context){
-                            return StateImageLoderSelect();
-                          })
-                      );
-                    },
-                    child: const FittedBox(
-                      child: Text('他の商品をスキャンする',
-                        style:TextStyle(
-                          fontSize: 24,
-                          color:Colors.deepOrange,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(0,0,5,10),
-                        height: 80,
-                        width: 160,
-                        child:OutlinedButton(
-                          style:OutlinedButton.styleFrom(
-                            side: const BorderSide(
-                              color: Colors.blue,
+                    child:RichText(
+                      text: const TextSpan(
+                          children: [
+                            TextSpan(
+                              text:'検出されたアレルゲン',
+                              style: TextStyle(
+                                fontSize: 25,
+                                color:Colors.deepOrange,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
+                          ]
+                      ),
+                    ),
+
+                  ),
+                ),
+              ),
+              Container(
+                  width: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(
+                          color:Colors.black12,
+                          blurRadius: 2,
+                          spreadRadius: 2,
+                          offset: Offset(7,7)
+                      )
+                    ],
+                  ),
+                child:SingleChildScrollView(
+                  child:Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children:<Widget>[
+                      Container(
+                        margin:const EdgeInsets.fromLTRB(10, 25, 10, 0),
+                        decoration: BoxDecoration(
+                            border: Border.all(color:Colors.deepOrange,width: 1)
+                        ),
+                        child:Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color:Colors.deepOrange,width: 1)
+                          ),
+                          margin: const EdgeInsets.all(5),
+                          width: 240,
+                          height: 180,
+
+                          //ここが表示部分
+                          child:ListView.builder(
+                            itemCount: vals.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 4.0)
+                                    .copyWith(left: 5.0),
+                                child: Text('・${vals[index]}',style:const TextStyle(fontSize: 23,fontWeight: FontWeight.bold,height: 1.3)),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 55,
+                        width: 260,
+                        margin: const EdgeInsets.fromLTRB(8,10,8,5),
+                        child:ElevatedButton(
+                          style:ElevatedButton.styleFrom(
+                              backgroundColor: Colors.orange[700],
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)
+                              ),
+                              elevation: 7
                           ),
                           onPressed: (){
-                            Navigator.popUntil(context,ModalRoute.withName('ChooseUser_page'));
+                            for(int n = 0; n < 2 ; n++ ){
+                              Navigator.pop(context);
+                            }
                           },
                           child: const FittedBox(
-                            child:Text('他のユーザー\nを選択する',
-                                style:TextStyle(
-                                  fontSize: 21,
-                                  color:Colors.indigo,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign:TextAlign.center
+                            child: Text('他の商品をスキャンする',
+                              style:TextStyle(
+                                fontSize: 24,
+                                color:Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.fromLTRB(5,0,0,10),
-                        height: 80,
-                        width: 150,
-                        child:OutlinedButton(
-                            style:OutlinedButton.styleFrom(
-                              side: const BorderSide(
-                                color: Colors.blue,
+                        height: 55,
+                        width: 260,
+                        margin: const EdgeInsets.fromLTRB(10,10,10,20),
+                        child:ElevatedButton(
+                          style:ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue[700],
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)
+                              ),
+                              elevation: 7
+                          ),
+                          onPressed: (){
+                            Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context){
+                                  return ReadIngredient();
+                                })
+                            );
+                          },
+                          child: const FittedBox(
+                            child: Text('読み取った成分を見る',
+                              style:TextStyle(
+                                fontSize: 24,
+                                color:Colors.white,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            child: const FittedBox(
-                              child:Text('読み取った\n成分を見る',
-                                  style:TextStyle(
-                                    fontSize: 21,
-                                    color:Colors.indigo,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign:TextAlign.center
-                              ),
-                            ),
-                            onPressed: (){
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (context){
-                                    return const ReadIngredient();
-                                  })
-                              );
-                            }
+                          ),
                         ),
-                      )
-                    ]
+                      ),
+                    ],
+                  ),
                 )
-              ],
-            ),
+              ),
+            ],
           )
+        ),
       ),
     );
   }

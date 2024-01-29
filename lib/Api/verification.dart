@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 import '../DB/Database.dart';
-//import '../DB/List.dart';
+import '../DB/List.dart';
+import '../DB/User.dart';
 import '../Data/AllAnotherData.dart';
 import '../Data/AllObligationData.dart';
 import '../Data/AllRecommendationData.dart';
@@ -11,12 +12,78 @@ class verifications{
   verifications._();
   static final verifications instance = verifications._();
   List<String> select = [];
+  int userid = 0;
   // 文字認識結果とユーザ選択成分の照合
   Future<List<String>> verification() async{
-    //選択した値格納変数
-    select = await AllObligationData().getValueCheck();
-    select.addAll(await AllRecommendationData().getValueCheck2());
-    select.addAll(await AllAnotherData().getValueCheck3());
+    Database db = await DBProvider.instance.database;
+    List<String> foodIDValue = [];//foodidのみ
+    List<String> foodNameValue = [];//foodnameのみ
+    List<String> addNameValue = [];//追加成分
+
+    print("これからユーザ検証");
+    if((DBuser.userId.contains(userid))){
+      print("ユーザ居た");
+      //選択されたユーザーがユーザ表に存在したら
+      final foodId = await db.rawQuery('SELECT foodid FROM list where userid = ?',[userid]);
+      debugPrint("ユーザ$useridが登録したfoodidは$foodId");
+
+      //foodIDをもとに、食品表のfoodnameを取得
+      //foodidのvalueだけを抽出
+      for (Map<String, dynamic?> value in foodId) {
+        value.forEach((key, value) {
+          foodIDValue.add(value as String); // foodidを1件ずつ格納
+          debugPrint('foodIDValueの内容：$foodIDValue');
+        });
+      }
+      debugPrint('最終的にfoodIDValueに入れた内容：$foodIDValue');
+
+      //foodidをもとに、foodNameを特定
+      for (int x = 0; x < foodIDValue.length; x++) {
+        final foodId2 = await db.rawQuery('SELECT foodname FROM food where foodid = ?', [foodIDValue[x]]);
+        for (Map<String, dynamic?> value2 in foodId2) {
+          value2.forEach((key, value) {
+            foodNameValue.add(value as String); // foodidを1件ずつ格納
+            debugPrint('foodNameValueの内容：$foodNameValue');
+          });
+        }
+        debugPrint('最終的にfoodNameValueに入れた内容：$foodNameValue');
+      }
+      select.addAll(foodNameValue);
+      print("登録された義務と推奨結合：$select");
+
+      //とあるユーザがリスト表に登録しているaddidを取得
+      final addid = await db.rawQuery('SELECT addid FROM list where userid = ?', [userid]);
+      print("addid確認：$addid");
+
+      //addidをもとにname
+      for (Map<String, dynamic?> ADD in addid) {
+        ADD.forEach((key, value) async {
+          for (int x = 0; x < ADD.length; x++) {
+            final addId2 = await db.rawQuery('SELECT hiragana,kanji,eigo,otherName FROM k_add where addid = ?', [value]);
+            debugPrint('addId2の内容：$addId2');
+            for (Map<String, dynamic?> value2 in addId2) {
+              value2.forEach((key, value) {
+                addNameValue.add(value as String);
+                debugPrint('addNameValueの内容：$addNameValue');
+
+                select.addAll(addNameValue);
+                print("リストの追加成分結合した結果：$select");
+              });
+            }
+          }
+        });
+      }
+    }else{
+      //選択した値格納変数
+      select = await AllObligationData().getValueCheck();
+      select.addAll(await AllRecommendationData().getValueCheck2());
+      select.addAll(await AllAnotherData().getValueCheck3());
+
+      print("Foodselect呼び出す");
+      List<String> foodSelect = await Foodselect();
+      select.addAll(foodSelect);
+      print("呼出し後のセレクト：$select");
+    }
 
     //文字認識結果格納変数
     List<String> resultvalues = await Api.instance.result();
@@ -26,10 +93,8 @@ class verifications{
 
     List<String> result = [];
 
-    print("Foodselect呼び出す");
-    List<String> foodSelect = await Foodselect();
-    select.addAll(foodSelect);
-    print("呼出し後のセレクト：$select");
+    select = select.where((element) => element.isNotEmpty).toList();
+    print("空箱排除後のセレクト：$select");
     select = select.toSet().toList();
     print("重複排除後のセレクト：$select");
 
@@ -50,32 +115,13 @@ class verifications{
     return result;
   }
 
-  //リストから照合
-  /*void selectName(String UserName) async{
-
-    Database db = await DBProvider.instance.database;
+  //ユーザ選択された時
+  void selectName(String UserName) async{
+    print("selectNameにきた");
     DBlist dbList = DBlist();
-    List<String> select = [];
-    List<String> foodname = await Foodselect();
-    print("void selectNameに持ってきた：$foodname");
-
-    final selectList = await db.rawQuery('SELECT hiragana,kanji,eigo,otherName FROM k_add where categoryid = ?',['TS']);
-    final int userid = await dbList.selectUserId(UserName);
-    final foodId = await db.rawQuery('SELECT foodid FROM list where userid = ?',['TS']);
-
-    List<Map<String, dynamic>> selectedList = await db.rawQuery('SELECT hiragana,kanji,eigo,otherName FROM k_add where categoryid = ? ',['TS']);
-    print("selectList：$selectList");
-
-    //Map→list変換
-    List<dynamic> addFoodDynamic = selectedList
-        .map((map) => [map['hiragana'], map['kanji'], map['eigo']])
-        .expand((element) => element)
-        .where((element) => element != null)
-        .toList();
-
-    //List<dynamic>→List<String>変換
-    List<String> addFood = addFoodDynamic.cast<String>();
-  }*/
+    userid = await dbList.selectUserId(UserName);
+    debugPrint("取得対象のユーザは$useridです");
+  }
 
   //データ取得部分
   Future <List<String>> Foodselect()async {
@@ -83,6 +129,7 @@ class verifications{
     List<Map<String, dynamic>> gimu = [];
     List<Map<String, dynamic>> g = [];
     List<String> All = [];
+    List<String> hira = [];
 
     if (select.isNotEmpty) {
       print("if文に入った");
@@ -119,17 +166,36 @@ class verifications{
       };
 
       //追加成分
-      if(AllAnotherData.valueCheck3.isNotEmpty){
-        List<Map<String, dynamic>> ad = await db.rawQuery('SELECT kanji,eigo,otherName FROM k_add WHERE categoryid = ?', ['TS']);
-        debugPrint('追加成分の漢字と英語をその他を空白込みで取得：$ad');
-        for (Map<String, dynamic?> data in ad) {
+      if (AllAnotherData.valueCheck3.isNotEmpty) {
+        List<Map<String, dynamic>> hiragana = await db.rawQuery('SELECT hiragana FROM k_add WHERE categoryid = ?', ['TS']);
+        debugPrint('ひらがなだけ取得：$hiragana');
+        for (Map<String, dynamic?> data in hiragana) {
           data.forEach((key, value) {
-            if(value != "" && value != null){
-              All.add(value as String);
+            if (value != "" && value != null) {
+              hira.add(value as String);
             }
           });
         }
-        debugPrint("値が入っている漢字、英語、その他を取ってきた$All");
+        debugPrint("ひらがなだけ取ってきた$hira");
+
+        for (int x = 0; x <
+            AllAnotherData.boolList3.length; x++) { //可変長の文だけ回ります
+          //ひらがなと一致した他データを取ってくる
+          if (select.contains(hira[x])) { //もしひらがなリストにselectがふくまれていたら
+            //ひらがなが一致する他データをとってくる
+            gimu = await db.rawQuery('SELECT kanji,eigo,otherName FROM k_add WHERE categoryid = ? AND hiragana = ?', ['TS', hira[x]]);
+          }
+
+          debugPrint('追加成分の漢字と英語をその他を空白込みで取得：$gimu');
+
+          for (Map<String, dynamic?> data in gimu) {
+            data.forEach((key, value) {
+              if (value != "" && value != null) {
+                All.add(value as String);
+              }
+            });
+          }
+        }
       }
 
       for (var value in select) {
