@@ -76,7 +76,7 @@ class DBlist{
         await db.delete('list', where: 'userid = ?', whereArgs: [deleteid],);//ユーザidと一致するリストデータの削除
         break; //ループを抜ける
       }else if(userMap.containsKey('userid2')){
-        deleteid = userMap['userid'] as int;
+        deleteid = userMap['userid2'] as int;
         debugPrint('userid2を出力：$deleteid');
         await db.delete('list', where: 'userid2 = ?', whereArgs: [deleteid],);//ユーザidと一致するリストデータの削除
         break; //ループを抜ける
