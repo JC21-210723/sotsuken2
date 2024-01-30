@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../DB/User.dart';
+
 import '../ui/CreateUser2.dart';
 import '../Data/AllUserData.dart';
 import '../Data/AllObligationData.dart';
@@ -130,11 +132,11 @@ class CreateUser1_Page extends State<StateCreateUser1>{
                               ),
                             ),
                           ),
-                          Text(ErrorMessage,style:const TextStyle(fontSize: 20,color:Colors.red)),
+                          Text(ErrorMessage,style:const TextStyle(fontSize: 20,color:Colors.red,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
                           Container(
                               width: 180,
                               height:55,
-                              margin: const EdgeInsets.fromLTRB(0, 10, 0, 30),
+                              margin: const EdgeInsets.fromLTRB(0, 15, 0, 30),
                               child:ElevatedButton(
                                 style:ElevatedButton.styleFrom(
                                   backgroundColor: Colors.indigo,
@@ -145,20 +147,30 @@ class CreateUser1_Page extends State<StateCreateUser1>{
                                 ),
                                 child:const Text('次へ',style: TextStyle(fontSize: 27,fontWeight: FontWeight.bold),),
                                 onPressed: (){
-                                  setState(() {
-                                    aud.setUserName(UN);
-                                    //UserName = aud.getUserName();
-                                    aod.AllResetObligation();
-                                    ard.AllResetRecommendation();
-                                    aad.AllResetAnother();
-                                  });
-                                  if(UN == ""){
-                                    /*
+                                  if(UN == "") {
                                     setState(() {
                                       ErrorMessage = "名前が入力されていません";
                                     });
-                                    */
+                                  }else if(DBuser.userName.contains(UN)){
+                                    setState((){
+                                      ErrorMessage = 'この名前は使われています';
+                                    });
+                                  }else if(UN.contains(' ')){
+                                    setState((){
+                                      ErrorMessage = '空白「 」は\nご利用いただけません';
+                                    });
+                                  }else if(UN.contains('　')){
+                                    setState((){
+                                      ErrorMessage = '空白「 」は\nご利用いただけません';
+                                    });
                                   }else{
+                                    setState(() {
+                                      aud.setUserName(UN);
+                                      //UserName = aud.getUserName();
+                                      aod.AllResetObligation();
+                                      ard.AllResetRecommendation();
+                                      aad.AllResetAnother();
+                                    });
                                     Navigator.of(context).push(
                                         MaterialPageRoute(builder: (context){
                                           return StateCreateUser2(aud.getUserName());

@@ -21,29 +21,29 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title:'成分チェッカー',
-        theme: ThemeData(
-          primaryColor: Colors.blue,
-        ),
-        routes: {
-          'ChooseUser_page':(context){
-            return const StateChooseUser();
-          },
-          'SettingUser_page':(context){
-            return const StateUserSettings1();
-          },
+      debugShowCheckedModeBanner: false,
+      title:'成分チェッカー',
+      theme: ThemeData(
+        primaryColor: Colors.blue,
+      ),
+      routes: {
+        'ChooseUser_page':(context){
+          return const StateChooseUser();
         },
-        home:Container(
-          decoration: const BoxDecoration(
+        'SettingUser_page':(context){
+          return const StateUserSettings1();
+        },
+      },
+      home:Container(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors:[Colors.white,Color(0xFF90D4FA)],
             )
-          ),
-          child:Home_Page_State(),
         ),
+        child:Home_Page_State(),
+      ),
     );
   }
 }
@@ -76,10 +76,10 @@ class Home_Page extends State<Home_Page_State>{
                   color: Colors.white,
                   boxShadow: const [
                     BoxShadow(
-                      color:Colors.black12,
-                      blurRadius: 2,
-                      spreadRadius: 2,
-                      offset: Offset(7,7)
+                        color:Colors.black12,
+                        blurRadius: 2,
+                        spreadRadius: 2,
+                        offset: Offset(7,7)
                     )
                   ],
                 ),
@@ -125,37 +125,37 @@ class Home_Page extends State<Home_Page_State>{
                             height: 170,
                             width: 120,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.black26,width: 3)
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.black26,width: 3)
                             ),
                             child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                side: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                backgroundColor: Colors.white,
-                                elevation:7
-                              ),
-                               child:Column(
-                                children: [
-                                   Container(
-                                     margin: EdgeInsets.fromLTRB(0, 3, 0, 0),
-                                     height: 113,
-                                     child:Image.asset(
-                                       'images/milk.png',
-                                       fit: BoxFit.fitWidth,
-                                     ),
-                                   ),
-                                  const Text('食品',
-                                    style: TextStyle(
-                                        fontSize: 27,color: Colors.indigo,
+                                style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(
+                                      color: Colors.white,
                                     ),
-                                  )
-                                ],
-                               ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    backgroundColor: Colors.white,
+                                    elevation:7
+                                ),
+                                child:Column(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                                      height: 113,
+                                      child:Image.asset(
+                                        'images/milk.png',
+                                        fit: BoxFit.fitWidth,
+                                      ),
+                                    ),
+                                    const Text('食品',
+                                      style: TextStyle(
+                                        fontSize: 27,color: Colors.indigo,
+                                      ),
+                                    )
+                                  ],
+                                ),
                                 onPressed:(){
                                   flagCategory = 'food';
                                   _selectlistUser();
@@ -190,8 +190,8 @@ class Home_Page extends State<Home_Page_State>{
                                       height: 113,
                                       margin: EdgeInsets.fromLTRB(0, 3, 0, 0),
                                       child:Image.asset(
-                                          'images/founda.png',
-                                          fit: BoxFit.fitWidth,
+                                        'images/founda.png',
+                                        fit: BoxFit.fitWidth,
                                       ),
                                     ),
                                     const Text('美容',
@@ -219,24 +219,24 @@ class Home_Page extends State<Home_Page_State>{
                         width: 210,
                         child:ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.orange,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)
-                            ),
-                            elevation: 7
+                              backgroundColor: Colors.orange,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)
+                              ),
+                              elevation: 7
                           ),
                           icon: Icon(Icons.import_contacts,color: Colors.white,),
                           label: const Text('ご利用方法',
-                                style: TextStyle(fontSize: 25,
-                                  color:Colors.white,
-                                  fontWeight:FontWeight.bold,
-                                )
-                            ),
+                              style: TextStyle(fontSize: 25,
+                                color:Colors.white,
+                                fontWeight:FontWeight.bold,
+                              )
+                          ),
                           onPressed: () {
                             Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context){
-                                return Manual_Page();
-                              })
+                                MaterialPageRoute(builder: (context){
+                                  return Manual_Page();
+                                })
                             );
                           },
                         ),
