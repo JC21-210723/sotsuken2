@@ -227,9 +227,8 @@ class Recommendation_allergy extends State<StateRecommendation_allergy> {
                       if(widget.PageFlag == 'ChooseUser' || widget.PageFlag =='SettingUser')...[
                         Container(
                           width: 290,
-                          height: 70,
+                          height: 55,
                           margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                          padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
                           child:ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.blue,
@@ -260,9 +259,8 @@ class Recommendation_allergy extends State<StateRecommendation_allergy> {
                       ],
                       Container(
                         width: 290,
-                        height: 70,
-                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                        padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
+                        height: 55,
+                        margin:const EdgeInsets.fromLTRB(0, 12, 0, 12),
                         child:  ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.orange[700],

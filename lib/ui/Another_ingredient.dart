@@ -106,6 +106,7 @@ class Another_ingredient extends State<StateAnother_ingredient>{
                             ),
                           ),
                         ),
+
                       Container(
                         padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
                         width: 322,
@@ -130,7 +131,6 @@ class Another_ingredient extends State<StateAnother_ingredient>{
                                     children: [
                                       for(int nn = 0 ; nn < 2  ; nn++)...[
                                         if(nn == 0)...[
-
                                           Container(
                                             height: 53,
                                             width:140,
@@ -154,7 +154,7 @@ class Another_ingredient extends State<StateAnother_ingredient>{
                                                 });
 
                                               },
-                                              child: Text(aad.getValue3()[n+nn],style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
+                                              child: Text(DBadd.AddList[n+nn],style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
                                             ),
                                             //↑今テストで作ってる
                                           ),
@@ -163,28 +163,38 @@ class Another_ingredient extends State<StateAnother_ingredient>{
 
                                           if(DBadd.AddList.length % 2 == 1 && DBadd.AddList.length == n+1)...[
                                             Container(
-                                              width: 167,
+                                              margin: const EdgeInsets.fromLTRB(0, 3, 7, 3),
+                                              width:140,
                                             ),
                                           ]else...[
                                             Container(
-                                              width: 167,
-                                              child:Transform.scale(
-                                                scale:1.1,
-                                                child: CheckboxListTile(
-                                                    controlAffinity: ListTileControlAffinity.leading,
-                                                    title: Transform.translate(
-                                                      offset: const Offset(-15,0),
-                                                      child:Text(DBadd.AddList[n+nn],style: TextStyle(fontSize: 18)),
-                                                    ),
-                                                    value: aad.getBool3()[n+nn],
-                                                    onChanged: (value) {
-                                                      setState(() {
-                                                        aad.getBool3()[n+nn] = value!;
-                                                      });
-                                                    }
+                                              height: 53,
+                                              width:140,
+                                              margin: const EdgeInsets.fromLTRB(0, 3, 7, 3),
+                                              child:ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor:  aad.getBool3()[n+nn] ? Colors.lightBlueAccent : Colors.white,
+                                                  foregroundColor: aad.getBool3()[n+nn] ? Colors.white : Colors.black,
+                                                  shape:const RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.only(
+                                                        bottomLeft:Radius.circular(50),
+                                                        topLeft:Radius.circular(50),
+                                                        topRight: Radius.circular(10),
+                                                        bottomRight: Radius.circular(10),
+                                                      )
+                                                  ),
                                                 ),
+                                                onPressed: (){
+                                                  setState(() {
+                                                    aad.getBool3()[n+nn] = !aad.getBool3()[n+nn];
+                                                  });
+
+                                                },
+                                                child: Text(DBadd.AddList[n+nn],style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
                                               ),
+                                              //↑今テストで作ってる
                                             ),
+
                                           ]
 
                                         ]

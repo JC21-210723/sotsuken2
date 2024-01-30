@@ -197,40 +197,74 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              height: 85,
-                              width: 150,
-                              margin: const EdgeInsets.fromLTRB(0, 10, 5, 0),
-                              padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
-                              child:ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.blue,
-                                    shape:RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    elevation: 7
-                                ),
-                                onPressed:(){
-                                  aod.HanteiObligation();
-                                  Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (context){
-                                        return StateRecommendation_allergy(PageFlag: widget.PageFlag, PageCount : pagecount);
-                                      })
-                                  );
-                                },
-                                child: const FittedBox(
-                                  child: Text('表示推奨\nアレルギー',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                            if(widget.PageFlag == 'CreateUser')...[
+                              Container(
+                                height: 55,
+                                width: 290,
+                                margin: const EdgeInsets.fromLTRB(5, 15, 5, 10),
+                                child:ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.blue,
+                                      shape:RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
                                       ),
-                                      textAlign: TextAlign.center
+                                      elevation: 7
                                   ),
-                                ),
+                                  onPressed:(){
+                                    aod.HanteiObligation();
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (context){
+                                          return StateRecommendation_allergy(PageFlag: widget.PageFlag, PageCount : pagecount);
+                                        })
+                                    );
+                                  },
+                                  child: const FittedBox(
+                                    child: Text('表示推奨アレルギー',
+                                        style: TextStyle(
+                                          fontSize: 23,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center
+                                    ),
+                                  ),
 
+                                ),
                               ),
-                            ),
+                            ],
                             if(widget.PageFlag == 'ChooseUser' || widget.PageFlag =='SettingUser')...[
+                              Container(
+                                height: 85,
+                                width: 150,
+                                margin: const EdgeInsets.fromLTRB(0, 10, 5, 0),
+                                padding:const EdgeInsets.fromLTRB(0, 7, 0, 7),
+                                child:ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.blue,
+                                      shape:RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      elevation: 7
+                                  ),
+                                  onPressed:(){
+                                    aod.HanteiObligation();
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (context){
+                                          return StateRecommendation_allergy(PageFlag: widget.PageFlag, PageCount : pagecount);
+                                        })
+                                    );
+                                  },
+                                  child: const FittedBox(
+                                    child: Text('表示推奨\nアレルギー',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center
+                                    ),
+                                  ),
+
+                                ),
+                              ),
                               Container(
                                 width: 140,
                                 height: 85,
@@ -267,9 +301,9 @@ class Obligation_allergy extends State<StateObligation_allergy>{
                         ),
 
                         Container(
-                          height: 70,
+                          height: 55,
                           width: 290,
-                          padding:const EdgeInsets.fromLTRB(0, 3, 0, 12),
+                          margin:const EdgeInsets.fromLTRB(0, 3, 0, 12),
                           child:  ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.orange[700],
