@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../DB/Add.dart';
-import '../DB/Database.dart';
 import '../DB/List.dart';
 
 class AllAnotherData{
@@ -47,6 +46,10 @@ class AllAnotherData{
 
   void setValueCheck3(List<String> dbValue){
     valueCheck3 =  dbValue;
+  }
+
+  void valueCheckClear3(){
+    valueCheck3.clear();
   }
 
   void AllResetAnother(){

@@ -54,6 +54,10 @@ class AllObligationData{
     valueCheck =  dbValue;
   }
 
+  void valueCheckClear(){
+    valueCheck.clear();
+  }
+
   void AllResetObligation(){
     boolList = List.filled(8, false);
     valueCheck = [];

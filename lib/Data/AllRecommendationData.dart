@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import '../DB/Food.dart';
 import '../DB/List.dart';
 
-import '../DB/Database.dart';
-
-
 class AllRecommendationData{
 
   static List<bool> boolList2 = List.filled(20, false);
@@ -56,6 +53,10 @@ class AllRecommendationData{
 
   void setValueCheck2(List<String> dbValue){
     valueCheck2 =  dbValue;
+  }
+
+  void valueCheckClear2(){
+    valueCheck2.clear();
   }
 
   void AllResetRecommendation(){

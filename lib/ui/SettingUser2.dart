@@ -7,6 +7,7 @@ import '../DB/List.dart';
 import '../ui/SettingUserNameChange.dart';
 import '../ui/SettingUserDelete.dart';
 import '../ui/SettingUserAllergy.dart';
+import '../main.dart';
 import '../Data/AllObligationData.dart';
 import '../Data/AllRecommendationData.dart';
 import '../Data/AllAnotherData.dart';
@@ -180,14 +181,17 @@ class UserSettings2 extends State<StateUserSettings2> {
                               ),
                               child: const Text('アレルゲンの変更',style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold),),
                               onPressed: (){
-                                //aod.AllResetObligation();
-                                //ard.AllResetRecommendation();
                                 _selectGimu();//追加した処理12/21
-                                aad.setValueList3();
-                                aod.setValueCheck(DBfood.Gimulist);
-                                ard.setValueCheck2(DBfood.Suilist);
-                                aad.setValueCheck3(DBadd.userAddList);
-
+                                aod.valueCheckClear();
+                                ard.valueCheckClear2();
+                                aad.valueCheckClear3();
+                                if(Home_Page.flagCategory == 'food'){
+                                  aod.setValueCheck(DBfood.Gimulist);
+                                  ard.setValueCheck2(DBfood.Suilist);
+                                  aad.setValueCheck3(DBadd.userAddList);
+                                }else{
+                                  aad.setValueCheck3(DBadd.userAddList);
+                                }
                                 Future.delayed(const Duration(seconds: 1)).then((_){
                                   Navigator.of(context).push(
                                       MaterialPageRoute(builder: (context){

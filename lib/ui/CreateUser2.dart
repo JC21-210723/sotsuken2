@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../ui/CreateUserCheck.dart';
 import '../ui/Obligation_allergy.dart';
 import '../ui/Another_ingredient.dart';
+import '../main.dart';
 import '../Data/AllAnotherData.dart';
 import '../component/AppbarComp.dart';
 import '../Data/AllRecommendationData.dart';
@@ -143,44 +144,47 @@ class CreateUser2_Page extends State<StateCreateUser2> {
                         Expanded(
                             child: ListView(
                               children: <Widget>[
-                                Container(
-                                    width:270,
-                                    height: 85,
-                                    margin: const EdgeInsets.fromLTRB(20,20,20,10),
-                                    child:ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor:Colors.lightBlue[400],
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(15)
-                                          ),
-                                          elevation: 7
-                                      ),
-                                      child:const Text('アレルゲンの選択\n(テンプレート)',
-                                        style: TextStyle(fontSize: 25,color:Colors.white,fontWeight: FontWeight.bold),
+                                if(Home_Page.flagCategory != 'beauty')...[
+                                  Container(
+                                      width:270,
+                                      height: 85,
+                                      margin: const EdgeInsets.fromLTRB(20,20,20,10),
+                                      child:ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor:Colors.lightBlue[400],
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(15)
+                                            ),
+                                            elevation: 7
+                                        ),
+                                        child:const Text('アレルゲンの選択\n(テンプレート)',
+                                          style: TextStyle(fontSize: 25,color:Colors.white,fontWeight: FontWeight.bold),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        onPressed: (){
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(builder: (context){
+                                                return const StateObligation_allergy(PageFlag : 'CreateUser');
+                                              })
+                                          );
+                                        },
+                                      )
+                                  ),
+                                  Container(
+                                    margin:const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                    child: const FittedBox(
+                                      child: Text('表示義務・推奨のアレルゲンを\nお選びいただけます。',
+                                        style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold),
                                         textAlign: TextAlign.center,
                                       ),
-                                      onPressed: (){
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(builder: (context){
-                                              return const StateObligation_allergy(PageFlag : 'CreateUser');
-                                            })
-                                        );
-                                      },
-                                    )
-                                ),
-                                Container(
-                                  margin:const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                                  child: const FittedBox(
-                                    child: Text('表示義務・推奨のアレルゲンを\nお選びいただけます。',
-                                      style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold),
-                                      textAlign: TextAlign.center,
                                     ),
                                   ),
-                                ),
+                                ],
+
                                 Container(
                                     width:260,
                                     height: 85,
-                                    margin: const EdgeInsets.fromLTRB(20,10,20,10),
+                                    margin: const EdgeInsets.fromLTRB(20,20,20,10),
                                     child:ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor:Colors.lightBlue[600],
