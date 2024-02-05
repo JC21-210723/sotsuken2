@@ -142,14 +142,17 @@ class UserSettings1 extends State<StateUserSettings1>{
                                             children: [
                                               if(DBuser.userName.isEmpty)...[
                                                 Container(
-                                                  margin:const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                                  margin:const EdgeInsets.fromLTRB(0, 40, 0, 20),
                                                   child:const FittedBox(
-                                                    child:Text('ユーザーが\n登録されていません',
-                                                      style:TextStyle(
-                                                        fontSize: 25,color:Colors.black87,
-                                                        fontWeight: FontWeight.bold,
-                                                      ),textAlign: TextAlign.center,
+                                                    child:Center(
+                                                      child:Text('ユーザーが\n登録されていません',
+                                                        style:TextStyle(
+                                                          fontSize: 25,color:Colors.black87,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),textAlign: TextAlign.center,
+                                                      ),
                                                     ),
+
                                                   ),
                                                 ),
                                               ],

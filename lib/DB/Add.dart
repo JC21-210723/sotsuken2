@@ -42,6 +42,8 @@ class DBadd{
   }
 
   static List<String> AddList = [];//登録された追加成分hiraganaの全表示
+  static List<String> shortAddList = [];
+  static List<String> longAddList = [];
   List<Map<String, dynamic>> hiragana2 = [];
   //追加登録成分の参照処理
   Future<List<String>> selectAdd() async {
@@ -72,6 +74,18 @@ class DBadd{
     }
     AddList.sort((a,b) => a.length.compareTo(b.length));
     debugPrint('最終的にAddListに入れた内容：$AddList');
+
+    //勝手に書いたごめん
+    shortAddList = [];
+    longAddList = [];
+    for(String adl in AddList){
+      if(adl.length <= 4){
+        shortAddList.add(adl);
+      }else if(adl.length > 4){
+        longAddList.add(adl);
+      }
+    }
+
     return AddList;
   }
 

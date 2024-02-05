@@ -26,7 +26,7 @@ class AllRecommendationData{
     return valueList2;
   }
 
-  List<bool> getBool(){
+  List<bool> getBool2(){
     return boolList2;
   }
 
