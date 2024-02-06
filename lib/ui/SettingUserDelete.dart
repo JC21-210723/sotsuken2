@@ -6,7 +6,7 @@ import '../DB/User.dart';
 
 import '../Data/AllUserData.dart';
 import '../component/AppbarComp.dart';
-import '../component/LoadingIndhicator.dart';
+import '../component/LoadingIndicator.dart';
 
 class StateSettingUserDelete extends StatefulWidget{
   final String UserName;
@@ -23,17 +23,18 @@ class SettingUserDelete extends State<StateSettingUserDelete>{
   bool Agree = false;
   String UN = "";
   AllUserData aud = AllUserData(username: AllUserData.sUserName);
+  String ErrorMessage = "";
 
   double _value = 0.0;
   bool isLoading = false;
 
   void StartTimer(){
+    isLoading = true;
     _value = 0;
     int counter = 0;
     Timer.periodic(Duration(milliseconds: 25), (Timer timer) {
       setState(() {
         ++counter;
-        debugPrint('counterのなかみ$counter');
         if(counter < 12){
           _value += (0.005 * counter/2);
         }else if(counter > 20){
@@ -182,6 +183,7 @@ class SettingUserDelete extends State<StateSettingUserDelete>{
                                 ),
                               ),
                             ),
+                            Text(ErrorMessage,style:const TextStyle(fontSize: 18,color:Colors.red,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
                             Container(
                                 width: 200,
                                 height:55,
@@ -198,19 +200,18 @@ class SettingUserDelete extends State<StateSettingUserDelete>{
                                   onPressed: (){
                                     setState(() {
                                       if(widget.UserName == UN && Agree == true){
-                                        isLoading = true;
                                         StartTimer();
                                         _deleteUser();
-                                        //aud.deleteUserName(widget.UserName);
+                                        Future.delayed(const Duration(seconds: 1)).then((_){
+                                          Navigator.popUntil(context,ModalRoute.withName('ChooseUser_page'));
+                                          isLoading = false;
+                                          setState(() {});
+                                        });
+                                      }else if(Agree != true){
+                                        ErrorMessage = "「ユーザーの削除」に\n同意してください";
                                       }else{
-                                        //エラーメッセが欲しいけど今出す場所ない
+                                        ErrorMessage = "ユーザー名が異なるため\n削除できませんでした";
                                       }
-                                    });
-                                    //ユ－ザー選択画面(ChooseUser)
-                                    Future.delayed(const Duration(seconds: 1)).then((_){
-                                      Navigator.popUntil(context,ModalRoute.withName('ChooseUser_page'));
-                                      isLoading = false;
-                                      setState(() {});
                                     });
                                   },
                                 )

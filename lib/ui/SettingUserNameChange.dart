@@ -4,7 +4,7 @@ import 'dart:async';
 import '../DB/User.dart';
 
 import '../component/AppbarComp.dart';
-import '../component/LoadingIndhicator.dart';
+import '../component/LoadingIndicator.dart';
 
 class StateSettingUserNameChange extends StatefulWidget{
   final String UserName;
@@ -18,17 +18,18 @@ class StateSettingUserNameChange extends StatefulWidget{
 
 class SettingUserNameChange extends State<StateSettingUserNameChange>{
   String afterName = "";
+  String ErrorMessage = "";
 
   double _value = 0.0;
   bool isLoading = false;
 
   void StartTimer(){
+    isLoading = true;
     _value = 0;
     int counter = 0;
     Timer.periodic(Duration(milliseconds: 25), (Timer timer) {
       setState(() {
         ++counter;
-        debugPrint('counterのなかみ$counter');
         if(counter < 12){
           _value += (0.005 * counter/2);
         }else if(counter > 20){
@@ -181,12 +182,14 @@ class SettingUserNameChange extends State<StateSettingUserNameChange>{
                                   child:TextField (
                                     style:const TextStyle(fontSize: 25,fontWeight: FontWeight.bold),
                                     maxLength: 7,
+
                                     onChanged: (value){
                                       afterName = value;
                                     },
                                   ),
                                 ),
                               ),
+                              Text(ErrorMessage,style:const TextStyle(fontSize: 18,color:Colors.red,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
                               Container(
                                   width: 180,
                                   height:55,
@@ -201,18 +204,35 @@ class SettingUserNameChange extends State<StateSettingUserNameChange>{
                                     ),
                                     child:const Text('更新',style: TextStyle(fontSize: 27,fontWeight: FontWeight.bold),),
                                     onPressed: (){
-                                      isLoading = true;
-                                      StartTimer();
-                                      setState(() {
-                                        _updateUser();
-                                        _selectlistUser();
-                                      });
-                                      //ユ－ザー選択画面(ChooseUser)
-                                      Future.delayed(const Duration(seconds: 1)).then((_){
-                                        Navigator.popUntil(context,ModalRoute.withName('ChooseUser_page'));
-                                        isLoading = false;
-                                        setState(() {});
-                                      });
+                                      if(afterName == "") {
+                                        setState(() {
+                                          ErrorMessage = "名前が入力されていません";
+                                        });
+                                      }else if(DBuser.userName.contains(afterName)){
+                                        setState((){
+                                          ErrorMessage = 'この名前は使われています';
+                                        });
+                                      }else if(afterName.contains(' ')){
+                                        setState((){
+                                          ErrorMessage = '空白「 」は\nご利用いただけません';
+                                        });
+                                      }else if(afterName.contains('　')){
+                                        setState((){
+                                          ErrorMessage = '空白「 」は\nご利用いただけません';
+                                        });
+                                      }else{
+                                        StartTimer();
+                                        setState(() {
+                                          _updateUser();
+                                          _selectlistUser();
+                                        });
+                                        //ユ－ザー選択画面(ChooseUser)
+                                        Future.delayed(const Duration(seconds: 1)).then((_){
+                                          Navigator.popUntil(context,ModalRoute.withName('ChooseUser_page'));
+                                          isLoading = false;
+                                          setState(() {});
+                                        });
+                                      }
                                     },
                                   )
                               ),

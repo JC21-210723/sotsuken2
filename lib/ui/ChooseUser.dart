@@ -15,7 +15,7 @@ import '../Data/AllAnotherData.dart';
 import '../component/HamburgerMenu.dart';
 import '../component/AppbarComp.dart';
 import '../component/BottomNavbarComp.dart';
-import '../component/LoadingIndhicator.dart';
+import '../component/LoadingIndicator.dart';
 
 import '../Api/verification.dart';
 
@@ -39,6 +39,7 @@ class ChooseUser_Page extends State<StateChooseUser>{
   bool isLoading = false;
 
   void StartTimer(){
+    isLoading = true;
     _value = 0;
     int counter = 0;
     Timer.periodic(Duration(milliseconds: 25), (Timer timer) {
@@ -174,8 +175,6 @@ class ChooseUser_Page extends State<StateChooseUser>{
                             child:Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children:<Widget>[
-
-
                                 Container(margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
                                   decoration: BoxDecoration(
                                     border: Border.all(
@@ -319,7 +318,6 @@ class ChooseUser_Page extends State<StateChooseUser>{
                                           ),
                                           onPressed: (){
                                             setState(() {
-                                              isLoading = true;
                                               StartTimer();
                                               aod.AllResetObligation();
                                               ard.AllResetRecommendation();
@@ -346,6 +344,8 @@ class ChooseUser_Page extends State<StateChooseUser>{
                                                   }),
                                                 );
                                                 aad.AllResetAnother();
+                                                isLoading = false;
+                                                setState(() {});
                                               });
                                             }
                                           },

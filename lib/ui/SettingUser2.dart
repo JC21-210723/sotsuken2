@@ -14,7 +14,7 @@ import '../Data/AllRecommendationData.dart';
 import '../Data/AllAnotherData.dart';
 import '../component/AppbarComp.dart';
 import '../component/BottomNavbarComp.dart';
-import '../component/LoadingIndhicator.dart';
+import '../component/LoadingIndicator.dart';
 
 class StateUserSettings2 extends StatefulWidget{
   final String UserName;
@@ -36,12 +36,12 @@ class UserSettings2 extends State<StateUserSettings2> {
   bool isLoading = false;
 
   void StartTimer(){
+    isLoading = true;
     _value = 0;
     int counter = 0;
     Timer.periodic(Duration(milliseconds: 25), (Timer timer) {
       setState(() {
         ++counter;
-        debugPrint('counterのなかみ$counter');
         if(counter < 12){
           _value += (0.005 * counter/2);
         }else if(counter > 20){
@@ -212,7 +212,6 @@ class UserSettings2 extends State<StateUserSettings2> {
                                     ),
                                     child: const Text('アレルゲンの変更',style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold),),
                                     onPressed: (){
-                                      isLoading = true;
                                       StartTimer();
                                       _selectGimu();//追加した処理12/21
                                       aod.valueCheckClear();

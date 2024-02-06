@@ -9,7 +9,8 @@ import '../Data/AllObligationData.dart';
 import '../Data/AllAnotherData.dart';
 import '../Data/AllRecommendationData.dart';
 import '../component/AppbarComp.dart';
-import '../component/LoadingIndhicator.dart';
+import '../component/LoadingIndicator.dart';
+import '../component/AlertDialogComp.dart';
 
 class StateRecommendation_allergy extends StatefulWidget{
   final String PageFlag;
@@ -35,9 +36,9 @@ class Recommendation_allergy extends State<StateRecommendation_allergy> {
     _value = 0;
     int counter = 0;
     Timer.periodic(Duration(milliseconds: 25), (Timer timer) {
+      isLoading = true;
       setState(() {
         ++counter;
-        debugPrint('counterのなかみ$counter');
         if(counter < 12){
           _value += (0.005 * counter/2);
         }else if(counter > 20){
@@ -269,7 +270,6 @@ class Recommendation_allergy extends State<StateRecommendation_allergy> {
                                     elevation: 7
                                 ),
                                 onPressed:(){
-                                  isLoading = true;
                                   StartTimer();
                                   _selectAdd();
                                   Future.delayed(const Duration(seconds: 1)).then((_) {
@@ -305,21 +305,28 @@ class Recommendation_allergy extends State<StateRecommendation_allergy> {
                                   elevation: 7
                               ),
                               onPressed:(){
-                                if(widget.PageFlag == 'ChooseUser'){
-                                  Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (context){
-                                        return const StateImageLoderSelect();
-                                      })
-                                  );
-                                }else if(widget.PageFlag == 'CreateUser' || widget.PageFlag =='SettingUser'){
-                                  //なおしたいNamdpush
-                                  Navigator.of(context).pop();
-                                  Navigator.of(context).pop();
-                                }
-                                debugPrint(widget.PageFlag.toString());
                                 aod.HanteiObligation();
                                 ard.HanteiRecommendation();
                                 aad.HanteiAnother();
+                                if(widget.PageFlag == 'ChooseUser'){
+                                  if(aod.getValueCheck().isEmpty && ard.getValueCheck2().isEmpty && aad.getValueCheck3().isEmpty){
+                                    showDialog(
+                                        context: context,
+                                        builder: (_){
+                                          return const  AlertDialogCompState();
+                                        }
+                                    );
+                                  }else{
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (context){
+                                          return const StateImageLoderSelect();
+                                        })
+                                    );
+                                  }
+                                }else if(widget.PageFlag == 'CreateUser' || widget.PageFlag =='SettingUser'){
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                }
                               },
                               child: const Text('決定',style: TextStyle(
                                 fontSize: 23,

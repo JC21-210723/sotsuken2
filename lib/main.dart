@@ -10,7 +10,7 @@ import 'ui/Manual.dart';
 import 'Data/AllAnotherData.dart';
 import 'component/AppbarComp.dart';
 import 'component/BottomNavbarComp.dart';
-import 'component/LoadingIndhicator.dart';
+import 'component/LoadingIndicator.dart';
 
 void main() {
   runApp(const MyApp());    //const無くても動く(下とセット)
@@ -63,12 +63,12 @@ class Home_Page extends State<Home_Page_State>{
   bool isLoading = false;
 
   void StartTimer(){
+    isLoading = true;
     _value = 0;
     int counter = 0;
     Timer.periodic(Duration(milliseconds: 25), (Timer timer) {
       setState(() {
         ++counter;
-        debugPrint('counterのなかみ$counter');
         if(counter < 12){
           _value += (0.005 * counter/2);
         }else if(counter > 20){
@@ -187,7 +187,6 @@ class Home_Page extends State<Home_Page_State>{
                                       ],
                                     ),
                                     onPressed:(){
-                                      isLoading = true;
                                       StartTimer();
                                       flagCategory = 'food';
                                       _selectlistUser();
@@ -239,7 +238,6 @@ class Home_Page extends State<Home_Page_State>{
                                       ],
                                     ),
                                     onPressed:(){
-                                      isLoading = true;
                                       StartTimer();
                                       flagCategory = 'beauty';
                                       _selectlistUser();

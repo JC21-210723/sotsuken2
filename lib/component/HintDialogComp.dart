@@ -1,24 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DialogCompState extends StatefulWidget {
+class HintDialogCompState extends StatefulWidget {
   final String text;
-  const DialogCompState({super.key, required this.text});
+  const HintDialogCompState({super.key, required this.text});
 
   @override
-  State<DialogCompState> createState() {
-    return DialogComp();
+  State<HintDialogCompState> createState() {
+    return HintDialogComp();
   }
 }
-class DialogComp extends State<DialogCompState>{
+class HintDialogComp extends State<HintDialogCompState>{
   @override
   Widget build(BuildContext context) {
     return CupertinoAlertDialog(
-      title: const Text('Hint',style: TextStyle(fontSize: 25),),
+      title: const Text('Hint',style: TextStyle(fontSize: 22),),
       content: Text(widget.text,style: const TextStyle(fontSize: 20),),
       actions: [
         CupertinoDialogAction(
-          child: const Text('OK',style: TextStyle(fontSize: 25),),
+          child: const Text('OK',style: TextStyle(fontSize: 23),),
           onPressed: (){
             Navigator.pop(context);
           },

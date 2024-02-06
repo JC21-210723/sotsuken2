@@ -7,7 +7,7 @@ import '../ui/Another_ingredient.dart';
 import '../main.dart';
 import '../Data/AllAnotherData.dart';
 import '../component/AppbarComp.dart';
-import '../component/LoadingIndhicator.dart';
+import '../component/LoadingIndicator.dart';
 import '../Data/AllRecommendationData.dart';
 import '../Data/AllObligationData.dart';
 
@@ -35,12 +35,12 @@ class CreateUser2_Page extends State<StateCreateUser2> {
   bool isLoading = false;
 
   void StartTimer(){
+    isLoading = true;
     _value = 0;
     int counter = 0;
     Timer.periodic(Duration(milliseconds: 25), (Timer timer) {
       setState(() {
         ++counter;
-        debugPrint('counterのなかみ$counter');
         if(counter < 12){
           _value += (0.005 * counter/2);
         }else if(counter > 20){
@@ -126,7 +126,7 @@ class CreateUser2_Page extends State<StateCreateUser2> {
                     ),
                     Container(
                       width: 320,
-                      height:370,
+                      height:400,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.white,
@@ -229,8 +229,6 @@ class CreateUser2_Page extends State<StateCreateUser2> {
                                               textAlign: TextAlign.center,
                                             ),
                                             onPressed: (){
-                                              isLoading = true;
-                                              //_value = 0;
                                               StartTimer();
                                               _selectAdd();
                                               aad.setValueList3();//移動した。お試し
