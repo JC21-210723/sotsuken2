@@ -14,8 +14,8 @@ class HintDialogComp extends State<HintDialogCompState>{
   @override
   Widget build(BuildContext context) {
     return CupertinoAlertDialog(
-      title: const Text('Hint',style: TextStyle(fontSize: 22),),
-      content: Text(widget.text,style: const TextStyle(fontSize: 20),),
+      title: const Text('Hint',style: TextStyle(fontSize: 20),),
+      content: Text(widget.text,style: const TextStyle(fontSize: 18),),
       actions: [
         CupertinoDialogAction(
           child: const Text('OK',style: TextStyle(fontSize: 23),),

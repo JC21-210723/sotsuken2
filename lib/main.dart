@@ -61,6 +61,7 @@ class Home_Page extends State<Home_Page_State>{
   AllAnotherData aad = AllAnotherData();
   double _value = 0.0;
   bool isLoading = false;
+  bool question = false;
 
   void StartTimer(){
     isLoading = true;
@@ -117,6 +118,7 @@ class Home_Page extends State<Home_Page_State>{
                         children: [
                           Container(
                             margin: const EdgeInsets.fromLTRB(30,30,30,15),
+                            padding: const EdgeInsets.fromLTRB(10,10,10,10),
                             decoration: BoxDecoration(
                               color:Colors.white,
                               borderRadius: BorderRadius.circular(5),
@@ -125,6 +127,34 @@ class Home_Page extends State<Home_Page_State>{
                                 width: 1,
                               ),
                             ),
+                            child:Container(
+                              height: 50,
+                              child:OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                    backgroundColor: question ? Colors.indigo : Colors.white,
+                                    foregroundColor: question ? Colors.white : Colors.indigo,
+                                    side: const BorderSide(color: Colors.indigo),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)
+                                    )
+                                ),
+                                onPressed: (){
+                                  setState(() {
+                                    question  = !question;
+                                  });
+                                  debugPrint(question.toString());
+                                },
+                                child: const FittedBox(
+                                  child:  Text('成分チェッカー',
+                                    style: TextStyle(
+                                        fontSize: 27,
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            /*
                             child:Container(
                                 margin: const EdgeInsets.fromLTRB(10,10,10,10),
                                 padding: const EdgeInsets.fromLTRB(25,15,25,15),
@@ -146,6 +176,10 @@ class Home_Page extends State<Home_Page_State>{
                                   ),
                                 )
                             ),
+
+                             */
+
+
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,

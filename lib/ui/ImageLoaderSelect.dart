@@ -84,7 +84,7 @@ class ImageLoderSelect extends State<StateImageLoderSelect> {
               ),
               Container(
                 width: 300,
-                margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
@@ -102,7 +102,7 @@ class ImageLoderSelect extends State<StateImageLoderSelect> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        margin: EdgeInsets.fromLTRB(10, 30, 10, 25),
+                        margin: const EdgeInsets.fromLTRB(10, 30, 10, 25),
                         width: 230,
                         height: 70,
                         child:ElevatedButton.icon(
@@ -113,7 +113,7 @@ class ImageLoderSelect extends State<StateImageLoderSelect> {
                               ) ,
                               elevation: 7
                           ),
-                          icon: Icon(Icons.photo_library,size: 30,),
+                          icon: const Icon(Icons.photo_library,size: 30,),
                           label: const FittedBox(
                             child:Text('メディアから取得',
                               style:TextStyle(

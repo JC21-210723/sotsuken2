@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'HintDialogComp.dart';
+import 'NicochanEvent.dart';
 
 class BottomNavbarCompState extends StatefulWidget{
   final String flagName;
@@ -84,7 +86,13 @@ class BottomNavbarComp extends State<BottomNavbarCompState> {
                       }
                   );
                 }else if(widget.flagName == 'main'){
-                  //なんもかんがえてない
+                  showDialog(
+                      barrierColor:Colors.transparent,
+                      context: context,
+                      builder: (_){
+                        return StateNicochanEvent();
+                      }
+                  );
                 }else{
                   Navigator.popUntil(context,ModalRoute.withName('ChooseUser_page'));
                 }

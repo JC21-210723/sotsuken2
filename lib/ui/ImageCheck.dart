@@ -187,7 +187,7 @@ class _ImageCheckState extends State<ImageCheck> {
                             Container(
                               width: 100,
                               height: 50,
-                              margin: EdgeInsets.fromLTRB(7, 5, 20, 15),
+                              margin: const EdgeInsets.fromLTRB(7, 5, 20, 15),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.blue[400],
@@ -211,7 +211,7 @@ class _ImageCheckState extends State<ImageCheck> {
                             Container(
                               width: 100,
                               height: 50,
-                              margin: EdgeInsets.fromLTRB(7, 5, 20, 15),
+                              margin: const EdgeInsets.fromLTRB(7, 5, 20, 15),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.orange[700],
