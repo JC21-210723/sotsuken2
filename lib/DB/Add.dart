@@ -162,4 +162,27 @@ class DBadd{
       return await db.delete('list', where: 'beautyid = ?', whereArgs: [addid],);
     }
   }
+
+  static List<String> addDetail = [];//追加成分の詳細が入っているリスト(これ使って!!)
+  List<Map<String,dynamic>> detail = [];
+  Future<List<String>> addlistDetail(String hiragana) async{
+    debugPrint('addDetailにきました');
+    addDetail.clear();
+    Database db = await DBProvider.instance.database;
+    if(Home_Page.flagCategory == 'food'){
+      debugPrint("foodです");
+      //タップされた「ひらがなorカタカナ」の成分名と一致する漢字、英語、その他の成分名を参照する↓
+      detail = await db.rawQuery('SELECT kanji,eigo,otherName FROM k_add where hiragana = ?',[hiragana]);
+    }else if(Home_Page.flagCategory == 'beauty') {
+      debugPrint("beautyです");
+      detail = await db.rawQuery('SELECT kanji,eigo,otherName FROM beauty where beautyname = ?',[hiragana]);
+    }
+    for (Map<String, dynamic?> AD in detail) {
+      AD.forEach((key, value) {
+        addDetail.add(value);
+        debugPrint('addDetailの結果：$addDetail');
+      });
+    }
+    return addDetail;
+  }
 }

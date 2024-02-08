@@ -90,7 +90,7 @@ class BottomNavbarComp extends State<BottomNavbarCompState> {
                       barrierColor:Colors.transparent,
                       context: context,
                       builder: (_){
-                        return StateNicochanEvent();
+                        return const StateNicochanEvent(nicounter:1);
                       }
                   );
                 }else{

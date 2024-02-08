@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class StateNicochanEvent extends StatefulWidget{
+  final int nicounter;
+  const StateNicochanEvent({super.key, required this.nicounter});
+
+
 
   @override
   State<StateNicochanEvent> createState() {
@@ -13,6 +17,7 @@ class NicochanEvent extends State<StateNicochanEvent> {
   double x = (Random().nextInt (16).toDouble()-8)/10;
   double y = (Random().nextInt (16).toDouble()-8)/10;
   double rotate = Random().nextInt (4).toDouble()-2;
+  int nicounter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +26,21 @@ class NicochanEvent extends State<StateNicochanEvent> {
         children: [
           GestureDetector(
             onTap: (){
-              showDialog(
-                  barrierColor:Colors.transparent,
-                  context: context,
-                  builder: (_){
-                    return StateNicochanEvent();
-                  }
-              );
+              if(widget.nicounter < 100){
+                setState(() {
+                  nicounter = widget.nicounter + 1;
+                });
+                showDialog(
+                    barrierColor:Colors.transparent,
+                    context: context,
+                    builder: (_){
+                      return StateNicochanEvent(nicounter:nicounter);
+                    }
+                );
+                if(widget.nicounter == 100){
+                  //おめでとうの処理をいれたい
+                }
+              }
             },
             child: Container(
               alignment:  Alignment(x,y),
@@ -56,6 +69,24 @@ class NicochanEvent extends State<StateNicochanEvent> {
                 ),
               ),
             )
+          ),
+          Align(
+              alignment: Alignment.bottomLeft,
+              child:Container(
+                margin: const  EdgeInsets.fromLTRB(20,0,0, 60),
+                width: 70,
+                height: 70,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
+                    border: Border.all(width:3,color:Colors.blue.shade300)
+                ),
+                child:Center(
+
+                  child: Text(widget.nicounter.toString(),style: TextStyle(fontSize: 25),textAlign:TextAlign.center,),
+                ),
+
+              )
           ),
         ],
       )
